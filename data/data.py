@@ -1,13 +1,16 @@
 import csv
 import json
 
+
 dict_from_csv = {}
 
-with open('GLOB.SES.csv', mode='r') as inp:
+with open('src/population_total.csv', mode='r', encoding="utf8") as inp:
     reader = csv.reader(inp)
-    dict_from_csv = {rows[0]:rows[7] for rows in reader}
+    for row in reader:
+        print(row)
+    #dict_from_csv = {rows[0]:rows[7] for rows in reader}
 
-print(dict_from_csv)
+#print(dict_from_csv)
 
 
 
