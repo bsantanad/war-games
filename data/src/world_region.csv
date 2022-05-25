@@ -31,57 +31,57 @@ ton,Tonga,east_asia_pacific
 tuv,Tuvalu,east_asia_pacific
 vut,Vanuatu,east_asia_pacific
 vnm,Vietnam,east_asia_pacific
-alb,Albania,europe_east
-and,Andorra,europe_west
-arm,Armenia,europe_east
-aut,Austria,europe_west
-aze,Azerbaijan,europe_east
-blr,Belarus,europe_east
-bel,Belgium,europe_west
-bih,Bosnia and Herzegovina,europe_east
-bgr,Bulgaria,europe_east
-hrv,Croatia,europe_east
-cyp,Cyprus,europe_west
-cze,Czech Republic,europe_east
-dnk,Denmark,europe_west
-est,Estonia,europe_east
-fin,Finland,europe_east
-fra,France,europe_west
-geo,Georgia,europe_east
-deu,Germany,europe_west
-grc,Greece,europe_west
-hun,Hungary,europe_east
-isl,Iceland,europe_west
-irl,Ireland,europe_west
-ita,Italy,europe_west
+alb,Albania,europe
+and,Andorra,europe
+arm,Armenia,europe
+aut,Austria,europe
+aze,Azerbaijan,europe
+blr,Belarus,europe
+bel,Belgium,europe
+bih,Bosnia and Herzegovina,europe
+bgr,Bulgaria,europe
+hrv,Croatia,europe
+cyp,Cyprus,europe
+cze,Czech Republic,europe
+dnk,Denmark,europe
+est,Estonia,europe
+fin,Finland,europe
+fra,France,europe
+geo,Georgia,europe
+deu,Germany,europe
+grc,Greece,europe
+hun,Hungary,europe
+isl,Iceland,europe
+irl,Ireland,europe
+ita,Italy,europe
 kaz,Kazakhstan,asia_west
 kgz,Kyrgyz Republic,asia_west
-lva,Latvia,europe_east
-lie,Liechtenstein,europe_west
-ltu,Lithuania,europe_east
-lux,Luxembourg,europe_west
-mkd,"Macedonia, FYR",europe_east
-mda,Moldova,europe_east
-mco,Monaco,europe_west
-mne,Montenegro,europe_east
-nld,Netherlands,europe_west
-nor,Norway,europe_west
-pol,Poland,europe_west
-prt,Portugal,europe_west
-rou,Romania,europe_east
-rus,Russia,europe_east
-smr,San Marino,europe_west
-srb,Serbia,europe_east
-svk,Slovak Republic,europe_east
-svn,Slovenia,europe_east
-esp,Spain,europe_west
-swe,Sweden,europe_west
-che,Switzerland,europe_west
+lva,Latvia,europe
+lie,Liechtenstein,europe
+ltu,Lithuania,europe
+lux,Luxembourg,europe
+mkd,"Macedonia, FYR",europe
+mda,Moldova,europe
+mco,Monaco,europe
+mne,Montenegro,europe
+nld,Netherlands,europe
+nor,Norway,europe
+pol,Poland,europe
+prt,Portugal,europe
+rou,Romania,europe
+rus,Russia,europe
+smr,San Marino,europe
+srb,Serbia,europe
+svk,Slovak Republic,europe
+svn,Slovenia,europe
+esp,Spain,europe
+swe,Sweden,europe
+che,Switzerland,europe
 tjk,Tajikistan,asia_west
-tur,Turkey,europe_east
+tur,Turkey,europe
 tkm,Turkmenistan,asia_west
-ukr,Ukraine,europe_east
-gbr,United Kingdom,europe_west
+ukr,Ukraine,europe
+gbr,United Kingdom,europe
 uzb,Uzbekistan,asia_west
 atg,Antigua and Barbuda,america_north
 arg,Argentina,america_south
@@ -127,7 +127,7 @@ jor,Jordan,asia_west
 kwt,Kuwait,asia_west
 lbn,Lebanon,asia_west
 lby,Libya,africa_north
-mlt,Malta,europe_west
+mlt,Malta,europe
 mar,Morocco,africa_north
 omn,Oman,asia_west
 qat,Qatar,asia_west
@@ -195,4 +195,4 @@ uga,Uganda,africa_sub_saharan
 zmb,Zambia,africa_sub_saharan
 zwe,Zimbabwe,africa_sub_saharan
 ssd,South Sudan,africa_sub_saharan
-hos,Holy See,europe_west
+hos,Holy See,europe

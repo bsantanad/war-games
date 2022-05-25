@@ -1,17 +1,23 @@
 import csv
 import json
+import re
 
+regions_data = dict()
 
-dict_from_csv = {}
-
-with open('src/population_total.csv', mode='r', encoding="utf8") as inp:
+with open('src/world_region.csv', mode='r', encoding="utf8") as inp:
     reader = csv.reader(inp)
+    next(reader, None)
     for row in reader:
-        print(row)
-    #dict_from_csv = {rows[0]:rows[7] for rows in reader}
+        country = row[1]
+        region = row[2]
+        if not region in regions_data:
+            regions_data[region] = set()
+        else:
+            regions_data[region].add(country)
+        
 
-#print(dict_from_csv)
-
+print(regions_data)
+print(len(regions_data))
 
 
 '''
