@@ -1,0 +1,198 @@
+geo,name,eight_regions
+aus,Australia,east_asia_pacific
+brn,Brunei,east_asia_pacific
+khm,Cambodia,east_asia_pacific
+chn,China,east_asia_pacific
+fji,Fiji,east_asia_pacific
+hkg,"Hong Kong, China",east_asia_pacific
+idn,Indonesia,east_asia_pacific
+jpn,Japan,east_asia_pacific
+kir,Kiribati,east_asia_pacific
+prk,North Korea,east_asia_pacific
+kor,South Korea,east_asia_pacific
+lao,Lao,east_asia_pacific
+mys,Malaysia,east_asia_pacific
+mhl,Marshall Islands,east_asia_pacific
+fsm,"Micronesia, Fed. Sts.",east_asia_pacific
+mng,Mongolia,east_asia_pacific
+mmr,Myanmar,east_asia_pacific
+nru,Nauru,east_asia_pacific
+nzl,New Zealand,east_asia_pacific
+plw,Palau,east_asia_pacific
+png,Papua New Guinea,east_asia_pacific
+phl,Philippines,east_asia_pacific
+wsm,Samoa,east_asia_pacific
+sgp,Singapore,east_asia_pacific
+slb,Solomon Islands,east_asia_pacific
+twn,Taiwan,east_asia_pacific
+tha,Thailand,east_asia_pacific
+tls,Timor-Leste,east_asia_pacific
+ton,Tonga,east_asia_pacific
+tuv,Tuvalu,east_asia_pacific
+vut,Vanuatu,east_asia_pacific
+vnm,Vietnam,east_asia_pacific
+alb,Albania,europe_east
+and,Andorra,europe_west
+arm,Armenia,europe_east
+aut,Austria,europe_west
+aze,Azerbaijan,europe_east
+blr,Belarus,europe_east
+bel,Belgium,europe_west
+bih,Bosnia and Herzegovina,europe_east
+bgr,Bulgaria,europe_east
+hrv,Croatia,europe_east
+cyp,Cyprus,europe_west
+cze,Czech Republic,europe_east
+dnk,Denmark,europe_west
+est,Estonia,europe_east
+fin,Finland,europe_east
+fra,France,europe_west
+geo,Georgia,europe_east
+deu,Germany,europe_west
+grc,Greece,europe_west
+hun,Hungary,europe_east
+isl,Iceland,europe_west
+irl,Ireland,europe_west
+ita,Italy,europe_west
+kaz,Kazakhstan,asia_west
+kgz,Kyrgyz Republic,asia_west
+lva,Latvia,europe_east
+lie,Liechtenstein,europe_west
+ltu,Lithuania,europe_east
+lux,Luxembourg,europe_west
+mkd,"Macedonia, FYR",europe_east
+mda,Moldova,europe_east
+mco,Monaco,europe_west
+mne,Montenegro,europe_east
+nld,Netherlands,europe_west
+nor,Norway,europe_west
+pol,Poland,europe_west
+prt,Portugal,europe_west
+rou,Romania,europe_east
+rus,Russia,europe_east
+smr,San Marino,europe_west
+srb,Serbia,europe_east
+svk,Slovak Republic,europe_east
+svn,Slovenia,europe_east
+esp,Spain,europe_west
+swe,Sweden,europe_west
+che,Switzerland,europe_west
+tjk,Tajikistan,asia_west
+tur,Turkey,europe_east
+tkm,Turkmenistan,asia_west
+ukr,Ukraine,europe_east
+gbr,United Kingdom,europe_west
+uzb,Uzbekistan,asia_west
+atg,Antigua and Barbuda,america_north
+arg,Argentina,america_south
+bhs,Bahamas,america_north
+brb,Barbados,america_north
+blz,Belize,america_north
+bol,Bolivia,america_south
+bra,Brazil,america_south
+chl,Chile,america_south
+col,Colombia,america_south
+cri,Costa Rica,america_north
+cub,Cuba,america_north
+dma,Dominica,america_north
+dom,Dominican Republic,america_north
+ecu,Ecuador,america_south
+slv,El Salvador,america_north
+grd,Grenada,america_north
+gtm,Guatemala,america_north
+guy,Guyana,america_south
+hti,Haiti,america_north
+hnd,Honduras,america_north
+jam,Jamaica,america_north
+mex,Mexico,america_north
+nic,Nicaragua,america_north
+pan,Panama,america_north
+pry,Paraguay,america_south
+per,Peru,america_south
+kna,St. Kitts and Nevis,america_north
+lca,St. Lucia,america_north
+vct,St. Vincent and the Grenadines,america_north
+sur,Suriname,america_south
+tto,Trinidad and Tobago,america_north
+ury,Uruguay,america_south
+ven,Venezuela,america_south
+dza,Algeria,africa_north
+bhr,Bahrain,asia_west
+dji,Djibouti,africa_north
+egy,Egypt,africa_north
+irn,Iran,asia_west
+irq,Iraq,asia_west
+isr,Israel,asia_west
+jor,Jordan,asia_west
+kwt,Kuwait,asia_west
+lbn,Lebanon,asia_west
+lby,Libya,africa_north
+mlt,Malta,europe_west
+mar,Morocco,africa_north
+omn,Oman,asia_west
+qat,Qatar,asia_west
+sau,Saudi Arabia,asia_west
+syr,Syria,asia_west
+tun,Tunisia,africa_north
+are,United Arab Emirates,asia_west
+pse,Palestine,asia_west
+yem,Yemen,asia_west
+can,Canada,america_north
+usa,United States,america_north
+afg,Afghanistan,asia_west
+bgd,Bangladesh,asia_west
+btn,Bhutan,asia_west
+ind,India,asia_west
+mdv,Maldives,asia_west
+npl,Nepal,asia_west
+pak,Pakistan,asia_west
+lka,Sri Lanka,asia_west
+ago,Angola,africa_sub_saharan
+ben,Benin,africa_sub_saharan
+bwa,Botswana,africa_sub_saharan
+bfa,Burkina Faso,africa_sub_saharan
+bdi,Burundi,africa_sub_saharan
+cmr,Cameroon,africa_sub_saharan
+cpv,Cape Verde,africa_sub_saharan
+caf,Central African Republic,africa_sub_saharan
+tcd,Chad,africa_sub_saharan
+com,Comoros,africa_sub_saharan
+cod,"Congo, Dem. Rep.",africa_sub_saharan
+cog,"Congo, Rep.",africa_sub_saharan
+civ,Cote d'Ivoire,africa_sub_saharan
+gnq,Equatorial Guinea,africa_sub_saharan
+eri,Eritrea,africa_sub_saharan
+eth,Ethiopia,africa_sub_saharan
+gab,Gabon,africa_sub_saharan
+gmb,Gambia,africa_sub_saharan
+gha,Ghana,africa_sub_saharan
+gin,Guinea,africa_sub_saharan
+gnb,Guinea-Bissau,africa_sub_saharan
+ken,Kenya,africa_sub_saharan
+lso,Lesotho,africa_sub_saharan
+lbr,Liberia,africa_sub_saharan
+mdg,Madagascar,africa_sub_saharan
+mwi,Malawi,africa_sub_saharan
+mli,Mali,africa_sub_saharan
+mrt,Mauritania,africa_sub_saharan
+mus,Mauritius,africa_sub_saharan
+moz,Mozambique,africa_sub_saharan
+nam,Namibia,africa_sub_saharan
+ner,Niger,africa_sub_saharan
+nga,Nigeria,africa_sub_saharan
+rwa,Rwanda,africa_sub_saharan
+stp,Sao Tome and Principe,africa_sub_saharan
+sen,Senegal,africa_sub_saharan
+syc,Seychelles,africa_sub_saharan
+sle,Sierra Leone,africa_sub_saharan
+som,Somalia,africa_sub_saharan
+zaf,South Africa,africa_sub_saharan
+sdn,Sudan,africa_sub_saharan
+swz,Swaziland,africa_sub_saharan
+tza,Tanzania,africa_sub_saharan
+tgo,Togo,africa_sub_saharan
+uga,Uganda,africa_sub_saharan
+zmb,Zambia,africa_sub_saharan
+zwe,Zimbabwe,africa_sub_saharan
+ssd,South Sudan,africa_sub_saharan
+hos,Holy See,europe_west
