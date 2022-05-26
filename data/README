@@ -1,0 +1,59 @@
+# Data Analysis
+
+# Sources
+
+Down are listed the sources used to simulate the input data.
+
+## GapMinder
+
+The link to the main source is: [https://www.gapminder.org/data/](https://www.gapminder.org/data/)
+
+### Files
+
+- Territory: `surface_area_sq_km.csv`
+- Population: `population_total.csv`
+- Growth rate: `population_growth_annual_percent.csv`
+- Income: `income_per_person_gdpercapita_ppp_inflation_adjusted.csv`
+- Literacy Rate: `literacy.csv`
+- Military: `ms_mil.csv`
+- World Region: world_region.csv
+
+# Data Preparation
+
+Data will be grouped by world regions.
+
+## JSON Structure
+
+Based on the information gathered, the output of the program is a JSON file, with the following structure:
+
+- Regions: a `string` containing the name of each one of the continent
+    - Variables (for each Region)
+        - Attributes (for each Variable)
+
+### Regions
+
+These are the regions that are listed in the file, containing its
+
+1. Europe: `"europe"`
+2. Africa: `“africa”`
+3. Asia: `“asia”`
+4. North America: `“n-america”`
+5. South America: `“s-america”`
+6. Oceania: `“oceania”`
+7. S. E. Asia and Middle East: `“seme-asia”`
+
+### Variables
+
+1. territory
+2. population
+3. growth-rate
+4. income
+5. literacy-rate
+6. military-spending
+
+### Attributes
+
+1. data
+2. distribution 
+3. mean 
+4. standard-deviation
