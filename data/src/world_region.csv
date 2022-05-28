@@ -1,36 +1,36 @@
 geo,name,eight_regions
-aus,Australia,east_asia_pacific
-brn,Brunei,east_asia_pacific
-khm,Cambodia,east_asia_pacific
-chn,China,east_asia_pacific
-fji,Fiji,east_asia_pacific
-hkg,"Hong Kong, China",east_asia_pacific
-idn,Indonesia,east_asia_pacific
-jpn,Japan,east_asia_pacific
-kir,Kiribati,east_asia_pacific
-prk,North Korea,east_asia_pacific
-kor,South Korea,east_asia_pacific
-lao,Lao,east_asia_pacific
-mys,Malaysia,east_asia_pacific
-mhl,Marshall Islands,east_asia_pacific
-fsm,"Micronesia, Fed. Sts.",east_asia_pacific
-mng,Mongolia,east_asia_pacific
-mmr,Myanmar,east_asia_pacific
-nru,Nauru,east_asia_pacific
-nzl,New Zealand,east_asia_pacific
-plw,Palau,east_asia_pacific
-png,Papua New Guinea,east_asia_pacific
-phl,Philippines,east_asia_pacific
-wsm,Samoa,east_asia_pacific
-sgp,Singapore,east_asia_pacific
-slb,Solomon Islands,east_asia_pacific
-twn,Taiwan,east_asia_pacific
-tha,Thailand,east_asia_pacific
-tls,Timor-Leste,east_asia_pacific
-ton,Tonga,east_asia_pacific
-tuv,Tuvalu,east_asia_pacific
-vut,Vanuatu,east_asia_pacific
-vnm,Vietnam,east_asia_pacific
+aus,Australia,oceania
+brn,Brunei,seme_asia
+khm,Cambodia,seme_asia
+chn,China,seme_asia
+fji,Fiji,oceania
+hkg,"Hong Kong, China",seme_asia
+idn,Indonesia,seme_asia
+jpn,Japan,seme_asia
+kir,Kiribati,oceania
+prk,North Korea,seme_asia
+kor,South Korea,seme_asia
+lao,Lao,seme_asia
+mys,Malaysia,seme_asia
+mhl,Marshall Islands,oceania
+fsm,"Micronesia, Fed. Sts.",oceania
+mng,Mongolia,seme_asia
+mmr,Myanmar,seme_asia
+nru,Nauru,oceania
+nzl,New Zealand,oceania
+plw,Palau,oceania
+png,Papua New Guinea,oceania
+phl,Philippines,seme_asia
+wsm,Samoa,oceania
+sgp,Singapore,seme_asia
+slb,Solomon Islands,oceania
+twn,Taiwan,seme_asia
+tha,Thailand,seme_asia
+tls,Timor-Leste,seme_asia
+ton,Tonga,oceania
+tuv,Tuvalu,oceania
+vut,Vanuatu,oceania
+vnm,Vietnam,seme_asia
 alb,Albania,europe
 and,Andorra,europe
 arm,Armenia,europe
@@ -54,8 +54,8 @@ hun,Hungary,europe
 isl,Iceland,europe
 irl,Ireland,europe
 ita,Italy,europe
-kaz,Kazakhstan,asia_west
-kgz,Kyrgyz Republic,asia_west
+kaz,Kazakhstan,asia
+kgz,Kyrgyz Republic,asia
 lva,Latvia,europe
 lie,Liechtenstein,europe
 ltu,Lithuania,europe
@@ -77,122 +77,122 @@ svn,Slovenia,europe
 esp,Spain,europe
 swe,Sweden,europe
 che,Switzerland,europe
-tjk,Tajikistan,asia_west
+tjk,Tajikistan,asia
 tur,Turkey,europe
-tkm,Turkmenistan,asia_west
+tkm,Turkmenistan,asia
 ukr,Ukraine,europe
 gbr,United Kingdom,europe
-uzb,Uzbekistan,asia_west
-atg,Antigua and Barbuda,america_north
-arg,Argentina,america_south
-bhs,Bahamas,america_north
-brb,Barbados,america_north
-blz,Belize,america_north
-bol,Bolivia,america_south
-bra,Brazil,america_south
-chl,Chile,america_south
-col,Colombia,america_south
-cri,Costa Rica,america_north
-cub,Cuba,america_north
-dma,Dominica,america_north
-dom,Dominican Republic,america_north
-ecu,Ecuador,america_south
-slv,El Salvador,america_north
-grd,Grenada,america_north
-gtm,Guatemala,america_north
-guy,Guyana,america_south
-hti,Haiti,america_north
-hnd,Honduras,america_north
-jam,Jamaica,america_north
-mex,Mexico,america_north
-nic,Nicaragua,america_north
-pan,Panama,america_north
-pry,Paraguay,america_south
-per,Peru,america_south
-kna,St. Kitts and Nevis,america_north
-lca,St. Lucia,america_north
-vct,St. Vincent and the Grenadines,america_north
-sur,Suriname,america_south
-tto,Trinidad and Tobago,america_north
-ury,Uruguay,america_south
-ven,Venezuela,america_south
-dza,Algeria,africa_north
-bhr,Bahrain,asia_west
-dji,Djibouti,africa_north
-egy,Egypt,africa_north
-irn,Iran,asia_west
-irq,Iraq,asia_west
-isr,Israel,asia_west
-jor,Jordan,asia_west
-kwt,Kuwait,asia_west
-lbn,Lebanon,asia_west
-lby,Libya,africa_north
+uzb,Uzbekistan,asia
+atg,Antigua and Barbuda,n_america
+arg,Argentina,s_america
+bhs,Bahamas,n_america
+brb,Barbados,n_america
+blz,Belize,n_america
+bol,Bolivia,s_america
+bra,Brazil,s_america
+chl,Chile,s_america
+col,Colombia,s_america
+cri,Costa Rica,n_america
+cub,Cuba,n_america
+dma,Dominica,n_america
+dom,Dominican Republic,n_america
+ecu,Ecuador,s_america
+slv,El Salvador,n_america
+grd,Grenada,n_america
+gtm,Guatemala,n_america
+guy,Guyana,s_america
+hti,Haiti,n_america
+hnd,Honduras,n_america
+jam,Jamaica,n_america
+mex,Mexico,n_america
+nic,Nicaragua,n_america
+pan,Panama,n_america
+pry,Paraguay,s_america
+per,Peru,s_america
+kna,St. Kitts and Nevis,n_america
+lca,St. Lucia,n_america
+vct,St. Vincent and the Grenadines,n_america
+sur,Suriname,s_america
+tto,Trinidad and Tobago,n_america
+ury,Uruguay,s_america
+ven,Venezuela,s_america
+dza,Algeria,africa
+bhr,Bahrain,asia
+dji,Djibouti,africa
+egy,Egypt,africa
+irn,Iran,asia
+irq,Iraq,asia
+isr,Israel,asia
+jor,Jordan,asia
+kwt,Kuwait,asia
+lbn,Lebanon,asia
+lby,Libya,africa
 mlt,Malta,europe
-mar,Morocco,africa_north
-omn,Oman,asia_west
-qat,Qatar,asia_west
-sau,Saudi Arabia,asia_west
-syr,Syria,asia_west
-tun,Tunisia,africa_north
-are,United Arab Emirates,asia_west
-pse,Palestine,asia_west
-yem,Yemen,asia_west
-can,Canada,america_north
-usa,United States,america_north
-afg,Afghanistan,asia_west
-bgd,Bangladesh,asia_west
-btn,Bhutan,asia_west
-ind,India,asia_west
-mdv,Maldives,asia_west
-npl,Nepal,asia_west
-pak,Pakistan,asia_west
-lka,Sri Lanka,asia_west
-ago,Angola,africa_sub_saharan
-ben,Benin,africa_sub_saharan
-bwa,Botswana,africa_sub_saharan
-bfa,Burkina Faso,africa_sub_saharan
-bdi,Burundi,africa_sub_saharan
-cmr,Cameroon,africa_sub_saharan
-cpv,Cape Verde,africa_sub_saharan
-caf,Central African Republic,africa_sub_saharan
-tcd,Chad,africa_sub_saharan
-com,Comoros,africa_sub_saharan
-cod,"Congo, Dem. Rep.",africa_sub_saharan
-cog,"Congo, Rep.",africa_sub_saharan
-civ,Cote d'Ivoire,africa_sub_saharan
-gnq,Equatorial Guinea,africa_sub_saharan
-eri,Eritrea,africa_sub_saharan
-eth,Ethiopia,africa_sub_saharan
-gab,Gabon,africa_sub_saharan
-gmb,Gambia,africa_sub_saharan
-gha,Ghana,africa_sub_saharan
-gin,Guinea,africa_sub_saharan
-gnb,Guinea-Bissau,africa_sub_saharan
-ken,Kenya,africa_sub_saharan
-lso,Lesotho,africa_sub_saharan
-lbr,Liberia,africa_sub_saharan
-mdg,Madagascar,africa_sub_saharan
-mwi,Malawi,africa_sub_saharan
-mli,Mali,africa_sub_saharan
-mrt,Mauritania,africa_sub_saharan
-mus,Mauritius,africa_sub_saharan
-moz,Mozambique,africa_sub_saharan
-nam,Namibia,africa_sub_saharan
-ner,Niger,africa_sub_saharan
-nga,Nigeria,africa_sub_saharan
-rwa,Rwanda,africa_sub_saharan
-stp,Sao Tome and Principe,africa_sub_saharan
-sen,Senegal,africa_sub_saharan
-syc,Seychelles,africa_sub_saharan
-sle,Sierra Leone,africa_sub_saharan
-som,Somalia,africa_sub_saharan
-zaf,South Africa,africa_sub_saharan
-sdn,Sudan,africa_sub_saharan
-swz,Swaziland,africa_sub_saharan
-tza,Tanzania,africa_sub_saharan
-tgo,Togo,africa_sub_saharan
-uga,Uganda,africa_sub_saharan
-zmb,Zambia,africa_sub_saharan
-zwe,Zimbabwe,africa_sub_saharan
-ssd,South Sudan,africa_sub_saharan
+mar,Morocco,africa
+omn,Oman,asia
+qat,Qatar,asia
+sau,Saudi Arabia,asia
+syr,Syria,asia
+tun,Tunisia,africa
+are,United Arab Emirates,asia
+pse,Palestine,asia
+yem,Yemen,asia
+can,Canada,n_america
+usa,United States,n_america
+afg,Afghanistan,asia
+bgd,Bangladesh,asia
+btn,Bhutan,asia
+ind,India,asia
+mdv,Maldives,asia
+npl,Nepal,asia
+pak,Pakistan,asia
+lka,Sri Lanka,asia
+ago,Angola,africa
+ben,Benin,africa
+bwa,Botswana,africa
+bfa,Burkina Faso,africa
+bdi,Burundi,africa
+cmr,Cameroon,africa
+cpv,Cape Verde,africa
+caf,Central African Republic,africa
+tcd,Chad,africa
+com,Comoros,africa
+cod,"Congo, Dem. Rep.",africa
+cog,"Congo, Rep.",africa
+civ,Cote d'Ivoire,africa
+gnq,Equatorial Guinea,africa
+eri,Eritrea,africa
+eth,Ethiopia,africa
+gab,Gabon,africa
+gmb,Gambia,africa
+gha,Ghana,africa
+gin,Guinea,africa
+gnb,Guinea-Bissau,africa
+ken,Kenya,africa
+lso,Lesotho,africa
+lbr,Liberia,africa
+mdg,Madagascar,africa
+mwi,Malawi,africa
+mli,Mali,africa
+mrt,Mauritania,africa
+mus,Mauritius,africa
+moz,Mozambique,africa
+nam,Namibia,africa
+ner,Niger,africa
+nga,Nigeria,africa
+rwa,Rwanda,africa
+stp,Sao Tome and Principe,africa
+sen,Senegal,africa
+syc,Seychelles,africa
+sle,Sierra Leone,africa
+som,Somalia,africa
+zaf,South Africa,africa
+sdn,Sudan,africa
+swz,Swaziland,africa
+tza,Tanzania,africa
+tgo,Togo,africa
+uga,Uganda,africa
+zmb,Zambia,africa
+zwe,Zimbabwe,africa
+ssd,South Sudan,africa
 hos,Holy See,europe
