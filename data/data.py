@@ -1,9 +1,10 @@
 import csv
 import json
 import re
+import numpy as np
 
 #from importlib_metadata import distribution
-tens = dict(k=10e3, m=10e6, b=10e9)
+tens = dict(k=1e3, m=1e6, b=1e9)
 regions_data = dict()
 class Region:
     def __init__(self, name):
@@ -23,7 +24,11 @@ class Variable:
         self.stdv = 0
 
 def conversion(x):
+    if x == '':
+        return 0
     factor, exp = x[0:-1], x[-1].lower()
+    if exp.isnumeric():
+        return float(x)
     ans = int(float(factor) * tens[exp])
     return ans
 
@@ -36,8 +41,6 @@ regions['n_america'] = Region('N America')
 regions['s_america'] = Region('S America')
 regions['oceania'] = Region('Oceania')
 regions['seme_asia'] = Region('S E Asia M E')
-
-
 
 
 with open('src/world_region.csv', mode='r', encoding="utf8") as inp:
@@ -60,32 +63,107 @@ with open('src/population_total.csv', mode='r', encoding="utf8") as pop:
         country = row[0]
         for continent, countries in regions_data.items():
             if country in countries:
-                if continent == 'europe':
-                    new_row = row[1:]
-                    converted = [conversion(x) for x in new_row]
-                    
-                    if not regions[continent].population.data:
-                        regions[continent].population.data = converted
-                    else: 
-                    
-                        for index, elem in enumerate(regions[continent].population.data):
-                            regions[continent].population.data[index] += converted[index]
-                    print(f"agrega {new_row[20]} : {regions[continent].population.data[20]}")
+                new_row = row[1:]
+                converted = [conversion(x) for x in new_row]
+                
+                if not regions[continent].population.data:
+                    regions[continent].population.data = converted
+                    #print(converted)
+                else:
+                    for index, elem in enumerate(regions[continent].population.data):
+                        regions[continent].population.data[index] += int(converted[index])
+                #print(f"agrega {new_row[222]} : {regions[continent].population.data[222]}")
 
-
-
-'''print(regions_data)
-print(len(regions_data))'''
-
-#seme_asia.population.data = 
-
-
-'''
-with open('GLOB.SES.csv', 'r') as file_csv:
-    fieldnames = ("field1","field2")
-    reader = csv.DictReader(file_csv, fieldnames)
-    
-with open('myfile.json', 'w') as file_json:
+with open('src/surface_area_sq_km.csv', mode='r', encoding="utf8") as ter:
+    reader = csv.reader(ter)
+    next(reader, None)
     for row in reader:
-            json.dump(row, file_json)    
+        country = row[0]
+        for continent, countries in regions_data.items():
+            if country in countries:
+                new_row = row[1:]
+                converted = [conversion(x) for x in new_row]
+                
+                if not regions[continent].territory.data:
+                    regions[continent].territory.data = converted
+                else:
+                    for index, elem in enumerate(regions[continent].territory.data):
+                        regions[continent].territory.data[index] += int(converted[index])
+
+#not sure if it has to be a sum :)
+with open('src/population_growth_annual_percent.csv', mode='r', encoding="utf8") as gro:
+    reader = csv.reader(gro)
+    next(reader, None)
+    for row in reader:
+        country = row[0]
+        for continent, countries in regions_data.items():
+            if country in countries:
+                new_row = row[1:]
+                converted = [conversion(x) for x in new_row]
+                
+                if not regions[continent].growth_rate.data:
+                    regions[continent].growth_rate.data = converted
+                else:
+                    for index, elem in enumerate(regions[continent].growth_rate.data):
+                        regions[continent].growth_rate.data[index] += int(converted[index])
+
+with open('src/income_per_person_gdppercapita_ppp_inflation_adjusted.csv', mode='r', encoding="utf8") as inc:
+    reader = csv.reader(inc)
+    next(reader, None)
+    for row in reader:
+        country = row[0]
+        for continent, countries in regions_data.items():
+            if country in countries:
+                new_row = row[1:]
+                converted = [conversion(x) for x in new_row]
+                
+                if not regions[continent].income.data:
+                    regions[continent].income.data = converted
+                else:
+                    for index, elem in enumerate(regions[continent].income.data):
+                        regions[continent].income.data[index] += int(converted[index])
+
+with open('src/ms_mil_xpnd_gd_zs.csv', mode='r', encoding="utf8") as mil:
+    reader = csv.reader(mil)
+    next(reader, None)
+    for row in reader:
+        country = row[0]
+        for continent, countries in regions_data.items():
+            if country in countries:
+                new_row = row[1:]
+                converted = [conversion(x) for x in new_row]
+                
+                if not regions[continent].military_spdng.data:
+                    regions[continent].military_spdng.data = converted
+                else:
+                    for index, elem in enumerate(regions[continent].military_spdng.data):
+                        regions[continent].military_spdng.data[index] += int(converted[index])
+
+#Calculating means and stdv's :)
+for continent, region in regions.items():
+    region.population.mean = np.mean(region.population.data)
+    region.population.stdv = np.std(region.population.data)
+
+    region.territory.mean = np.mean(region.territory.data)
+    region.territory.stdv = np.std(region.territory.data)
+
+    region.growth_rate.mean = np.mean(region.growth_rate.data)
+    region.growth_rate.stdv = np.std(region.growth_rate.data)
+
+    region.income.mean = np.mean(region.income.data)
+    region.income.stdv = np.std(region.income.data)
+
+    region.military_spdng.mean = np.mean(region.military_spdng.data)
+    region.military_spdng.stdv = np.std(region.military_spdng.data)
+    
+
+
 '''
+print(regions['africa'].population.data[219])
+print(regions['africa'].territory.data[57])
+print(regions['africa'].growth_rate.data[57])
+print(regions['africa'].income.data[219])
+print(regions['africa'].military_spdng.data[57])
+'''
+
+print(regions['europe'].population.mean)

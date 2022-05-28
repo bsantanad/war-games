@@ -4,7 +4,7 @@ brn,Brunei,seme_asia
 khm,Cambodia,seme_asia
 chn,China,seme_asia
 fji,Fiji,oceania
-hkg,"Hong Kong, China",seme_asia
+hkg,Hong Kong, China,seme_asia
 idn,Indonesia,seme_asia
 jpn,Japan,seme_asia
 kir,Kiribati,oceania
@@ -13,7 +13,7 @@ kor,South Korea,seme_asia
 lao,Lao,seme_asia
 mys,Malaysia,seme_asia
 mhl,Marshall Islands,oceania
-fsm,"Micronesia, Fed. Sts.",oceania
+fsm,Micronesia, Fed. Sts.,oceania
 mng,Mongolia,seme_asia
 mmr,Myanmar,seme_asia
 nru,Nauru,oceania
@@ -60,7 +60,7 @@ lva,Latvia,europe
 lie,Liechtenstein,europe
 ltu,Lithuania,europe
 lux,Luxembourg,europe
-mkd,"Macedonia, FYR",europe
+mkd,Macedonia, FYR,europe
 mda,Moldova,europe
 mco,Monaco,europe
 mne,Montenegro,europe
@@ -157,8 +157,8 @@ cpv,Cape Verde,africa
 caf,Central African Republic,africa
 tcd,Chad,africa
 com,Comoros,africa
-cod,"Congo, Dem. Rep.",africa
-cog,"Congo, Rep.",africa
+cod,Congo, Dem. Rep.,africa
+cog,Congo, Rep.,africa
 civ,Cote d'Ivoire,africa
 gnq,Equatorial Guinea,africa
 eri,Eritrea,africa
