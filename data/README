@@ -1,5 +1,9 @@
 # Data Analysis
 
+# Libraries 
+- numpy
+- fitter
+
 # Sources
 
 Down are listed the sources used to simulate the input data.
