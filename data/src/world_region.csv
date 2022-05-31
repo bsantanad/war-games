@@ -1,36 +1,36 @@
 geo,name,eight_regions
-aus,Australia,oceania
-brn,Brunei,seme_asia
-khm,Cambodia,seme_asia
-chn,China,seme_asia
-fji,Fiji,oceania
-hkg,Hong Kong, China,seme_asia
-idn,Indonesia,seme_asia
-jpn,Japan,seme_asia
-kir,Kiribati,oceania
-prk,North Korea,seme_asia
-kor,South Korea,seme_asia
-lao,Lao,seme_asia
-mys,Malaysia,seme_asia
-mhl,Marshall Islands,oceania
-fsm,Micronesia, Fed. Sts.,oceania
-mng,Mongolia,seme_asia
-mmr,Myanmar,seme_asia
-nru,Nauru,oceania
-nzl,New Zealand,oceania
-plw,Palau,oceania
-png,Papua New Guinea,oceania
-phl,Philippines,seme_asia
-wsm,Samoa,oceania
-sgp,Singapore,seme_asia
-slb,Solomon Islands,oceania
-twn,Taiwan,seme_asia
-tha,Thailand,seme_asia
-tls,Timor-Leste,seme_asia
-ton,Tonga,oceania
-tuv,Tuvalu,oceania
-vut,Vanuatu,oceania
-vnm,Vietnam,seme_asia
+aus,Australia,oceania_se_asia
+brn,Brunei,oceania_se_asia
+khm,Cambodia,oceania_se_asia
+chn,China,oceania_se_asia
+fji,Fiji,oceania_se_asia
+hkg,Hong Kong, China,oceania_se_asia
+idn,Indonesia,oceania_se_asia
+jpn,Japan,oceania_se_asia
+kir,Kiribati,oceania_se_asia
+prk,North Korea,oceania_se_asia
+kor,South Korea,oceania_se_asia
+lao,Lao,oceania_se_asia
+mys,Malaysia,oceania_se_asia
+mhl,Marshall Islands,oceania_se_asia
+fsm,Micronesia, Fed. Sts.,oceania_se_asia
+mng,Mongolia,oceania_se_asia
+mmr,Myanmar,oceania_se_asia
+nru,Nauru,oceania_se_asia
+nzl,New Zealand,oceania_se_asia
+plw,Palau,oceania_se_asia
+png,Papua New Guinea,oceania_se_asia
+phl,Philippines,oceania_se_asia
+wsm,Samoa,oceania_se_asia
+sgp,Singapore,oceania_se_asia
+slb,Solomon Islands,oceania_se_asia
+twn,Taiwan,oceania_se_asia
+tha,Thailand,oceania_se_asia
+tls,Timor-Leste,oceania_se_asia
+ton,Tonga,oceania_se_asia
+tuv,Tuvalu,oceania_se_asia
+vut,Vanuatu,oceania_se_asia
+vnm,Vietnam,oceania_se_asia
 alb,Albania,europe
 and,Andorra,europe
 arm,Armenia,europe
@@ -122,21 +122,21 @@ dji,Djibouti,africa
 egy,Egypt,africa
 irn,Iran,asia
 irq,Iraq,asia
-isr,Israel,asia
-jor,Jordan,asia
-kwt,Kuwait,asia
-lbn,Lebanon,asia
+isr,Israel,asia_middle_east
+jor,Jordan,asia_middle_east
+kwt,Kuwait,asia_middle_east
+lbn,Lebanon,asia_middle_east
 lby,Libya,africa
 mlt,Malta,europe
 mar,Morocco,africa
-omn,Oman,asia
-qat,Qatar,asia
-sau,Saudi Arabia,asia
-syr,Syria,asia
+omn,Oman,asia_middle_east
+qat,Qatar,asia_middle_east
+sau,Saudi Arabia,asia_middle_east
+syr,Syria,asia_middle_east
 tun,Tunisia,africa
 are,United Arab Emirates,asia
-pse,Palestine,asia
-yem,Yemen,asia
+pse,Palestine,asia_middle_east
+yem,Yemen,asia_middle_east
 can,Canada,n_america
 usa,United States,n_america
 afg,Afghanistan,asia

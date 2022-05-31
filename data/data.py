@@ -50,8 +50,8 @@ def get_regions():
     regions['asia'] = Region('Asia')
     regions['n_america'] = Region('N America')
     regions['s_america'] = Region('S America')
-    regions['oceania'] = Region('Oceania')
-    regions['seme_asia'] = Region('S E Asia M E')
+    regions['oceania_se_asia'] = Region('Oceania and S. E. Asia')
+    regions['asia_middle_east'] = Region('Middle East Asia')
 
     with open(abs_path('src/world_region.csv'), mode='r', encoding="utf8") as inp:
         reader = csv.reader(inp)
@@ -92,6 +92,7 @@ def get_regions():
             for continent, countries in regions_data.items():
                 if country in countries:
                     new_row = row[1:]
+                    print(country)
                     converted = [conversion(x) for x in new_row]
                     
                     if not regions[continent].territory.data:
