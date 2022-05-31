@@ -1,0 +1,109 @@
+nxn grid every cell will represent a square unit of territory, a country
+can have more than 1
+
+we can add numbers to the countries so the matrix would look smth like this:
+0, 1, 1, 1, 2, 2,
+0, 0, 1, 1, 1, 2,
+0, 0, 0, 1, 2, 2,
+0, 3, 3, 1, 4, 4,
+0, 3, 3, 3, 4, 4,
+
+
+----
+init
+----
+
+init every country with a random variable extracted from the dist for each
+of the following things:
+- territory
+- population
+- population growth
+- income per capita
+- literacy rate
+- military spending by % of GDP
+
+also, from a random normally distributed variable you will get
+- government rate: value between 1 and 0, the stronger it is, the more
+  repressive it gets, the weaker the harder to deal with internal issues
+
+total income: population * income per capita
+
+------
+growth
+------
+
+every month update the population by 1/12 of the population grow rate and then
+update country total income
+
+-------------
+war mechanics
+-------------
+
+every day check if triggers has been activated. left to right, then top to
+bottom. if war has already started can not start another one.
+
+every time war starts log it.
+
+triggers
+-------------
+- income
+- population density
+
+based on world distributions.
+
+we will use the income and population density of the whole world in order to
+build distributions, and get the mean and standard deviation
+
+INCOME_THREASHOLD and POP_THREASHOLD, to fine tune the triggers
+
+income trigger
+--------------
+- if 2 neighbours countries reach a diff of INCOME_THRESHOLD times de std
+  deviation of the world income a conflict will arise WITHIN country. Country
+  has strong gov then conflict withheld
+
+- if neighbour country total income is within one std deviation of owns, then
+  foreign country will launch the war
+
+population trigger
+------------------
+
+if population density reaches one std dev above the median of the region, a
+conflict will be triggered in order to look for further territory.
+
+it will select the neighbour with the lowest income to attack
+
+conflict
+--------
+battles are decided by CWI. each square in combat will calculate it.
+
+CW = TI * GR * LR * MS * LK
+TI = country's total income
+GR = government rate
+LR = literacy rate
+MS = military spending
+LK = luck
+
+internal conflict
+-----------------
+fixme
+
+casualties
+----------
+calc the death toll on both sides
+DF = (CWI-)/(CWI+)
+CWI- of lossing side
+CWI+ of winner side
+DF should be between 0 and 1
+
+multiply DF with the population density of the losing country and subtract from
+the country population
+
+the winner use
+Casualties = (1 - DF)(DF)(PD+)
+
+outcomes
+--------
+
+when a side looses that territory is annexed to the country that won
+

@@ -2,12 +2,15 @@ import csv
 import json
 import re
 import numpy as np
+
 from fitter import Fitter, get_common_distributions, get_distributions
 
 #from importlib_metadata import distribution
 tens = dict(k=1e3, m=1e6, b=1e9)
 regions_data = dict()
+
 distributions_list = ['gamma', 'lognorm', "beta", "burr", "norm"]
+
 class Region:
     def __init__(self, name):
         self.name = name
@@ -140,6 +143,7 @@ with open('src/ms_mil_xpnd_gd_zs.csv', mode='r', encoding="utf8") as mil:
                 else:
                     for index, elem in enumerate(regions[continent].military_spdng.data):
                         regions[continent].military_spdng.data[index] += int(converted[index])
+
 
 #Calculating means, stdv's and best fit distribution :)
 for continent, region in regions.items():
