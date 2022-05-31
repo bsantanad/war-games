@@ -1,6 +1,14 @@
 nxn grid every cell will represent a square unit of territory, a country
 can have more than 1
 
+we can add numbers to the countries so the matrix would look smth like this:
+0, 1, 1, 1, 2, 2,
+0, 0, 1, 1, 1, 2,
+0, 0, 0, 1, 2, 2,
+0, 3, 3, 1, 4, 4,
+0, 3, 3, 3, 4, 4,
+
+
 ----
 init
 ----
