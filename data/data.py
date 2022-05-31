@@ -92,7 +92,6 @@ def get_regions():
             for continent, countries in regions_data.items():
                 if country in countries:
                     new_row = row[1:]
-                    print(country)
                     converted = [conversion(x) for x in new_row]
                     
                     if not regions[continent].territory.data:

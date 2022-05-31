@@ -4,7 +4,7 @@ brn,Brunei,oceania_se_asia
 khm,Cambodia,oceania_se_asia
 chn,China,oceania_se_asia
 fji,Fiji,oceania_se_asia
-hkg,Hong Kong, China,oceania_se_asia
+hkg,Hong Kong China,oceania_se_asia
 idn,Indonesia,oceania_se_asia
 jpn,Japan,oceania_se_asia
 kir,Kiribati,oceania_se_asia
@@ -13,7 +13,7 @@ kor,South Korea,oceania_se_asia
 lao,Lao,oceania_se_asia
 mys,Malaysia,oceania_se_asia
 mhl,Marshall Islands,oceania_se_asia
-fsm,Micronesia, Fed. Sts.,oceania_se_asia
+fsm,Micronesia Fed. Sts.,oceania_se_asia
 mng,Mongolia,oceania_se_asia
 mmr,Myanmar,oceania_se_asia
 nru,Nauru,oceania_se_asia
@@ -157,8 +157,8 @@ cpv,Cape Verde,africa
 caf,Central African Republic,africa
 tcd,Chad,africa
 com,Comoros,africa
-cod,Congo, Dem. Rep.,africa
-cog,Congo, Rep.,africa
+cod,Congo Dem. Rep.,africa
+cog,Congo Rep.,africa
 civ,Cote d'Ivoire,africa
 gnq,Equatorial Guinea,africa
 eri,Eritrea,africa
