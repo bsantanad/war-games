@@ -2,6 +2,7 @@ import csv
 import json
 import re
 import numpy as np
+import os
 
 from fitter import Fitter, get_common_distributions, get_distributions
 
@@ -37,6 +38,10 @@ def conversion(x):
     ans = int(float(factor) * tens[exp])
     return ans
 
+script_dir = os.path.dirname(__file__)
+def abs_path(rel_path):
+    return os.path.join(script_dir, rel_path)
+
 def get_regions():
     regions = dict()
 
@@ -48,8 +53,7 @@ def get_regions():
     regions['oceania'] = Region('Oceania')
     regions['seme_asia'] = Region('S E Asia M E')
 
-
-    with open('src/world_region.csv', mode='r', encoding="utf8") as inp:
+    with open(abs_path('src/world_region.csv'), mode='r', encoding="utf8") as inp:
         reader = csv.reader(inp)
         next(reader, None)
         for row in reader:
@@ -61,7 +65,7 @@ def get_regions():
                 regions_data[region].add(country)
         
 
-    with open('src/population_total.csv', mode='r', encoding="utf8") as pop:
+    with open(abs_path('src/population_total.csv'), mode='r', encoding="utf8") as pop:
         reader = csv.reader(pop)
         next(reader, None)
         for row in reader:
@@ -80,7 +84,7 @@ def get_regions():
                             regions[continent].population.data[index] += int(converted[index])
                     #print(f"agrega {new_row[222]} : {regions[continent].population.data[222]}")
 
-    with open('src/surface_area_sq_km.csv', mode='r', encoding="utf8") as ter:
+    with open(abs_path('src/surface_area_sq_km.csv'), mode='r', encoding="utf8") as ter:
         reader = csv.reader(ter)
         next(reader, None)
         for row in reader:
@@ -97,7 +101,7 @@ def get_regions():
                             regions[continent].territory.data[index] += int(converted[index])
 
     #not sure if it has to be a sum :)
-    with open('src/population_growth_annual_percent.csv', mode='r', encoding="utf8") as gro:
+    with open(abs_path('src/population_growth_annual_percent.csv'), mode='r', encoding="utf8") as gro:
         reader = csv.reader(gro)
         next(reader, None)
         for row in reader:
@@ -113,7 +117,7 @@ def get_regions():
                         for index, elem in enumerate(regions[continent].growth_rate.data):
                             regions[continent].growth_rate.data[index] += int(converted[index])
 
-    with open('src/income_per_person_gdppercapita_ppp_inflation_adjusted.csv', mode='r', encoding="utf8") as inc:
+    with open(abs_path('src/income_per_person_gdppercapita_ppp_inflation_adjusted.csv'), mode='r', encoding="utf8") as inc:
         reader = csv.reader(inc)
         next(reader, None)
         for row in reader:
@@ -129,7 +133,7 @@ def get_regions():
                         for index, elem in enumerate(regions[continent].income.data):
                             regions[continent].income.data[index] += int(converted[index])
 
-    with open('src/ms_mil_xpnd_gd_zs.csv', mode='r', encoding="utf8") as mil:
+    with open(abs_path('src/ms_mil_xpnd_gd_zs.csv'), mode='r', encoding="utf8") as mil:
         reader = csv.reader(mil)
         next(reader, None)
         for row in reader:
@@ -188,6 +192,7 @@ print(regions['africa'].growth_rate.data[57])
 print(regions['africa'].income.data[219])
 print(regions['africa'].military_spdng.data[57])
 '''
+
 regions = get_regions()
 print(regions['europe'].territory.distribution)
 print(regions['asia'].population.distribution)
