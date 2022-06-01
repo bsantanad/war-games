@@ -8,8 +8,6 @@ import simpy
 
 import lib
 
-import colorama
-
 '''
 FIXME
 does not consider internal conflicts
@@ -19,25 +17,7 @@ does not consider literacy
 does not consider peace times
 '''
 
-def color_sign(x):
-    c = colorama.Fore.WHITE
-    if x == 1:
-        c = colorama.Fore.GREEN
-    if x == 2:
-        c = colorama.Fore.RED
-    if x == 3:
-        c = colorama.Fore.RESET
-    if x == 4:
-        c = colorama.Fore.YELLOW
-    if x == 5:
-        c = colorama.Fore.WHITE
-    if x == 6:
-        c = colorama.Fore.MAGENTA
-    if x == 7:
-        c = colorama.Fore.CYAN
-    return f'{c}{x}'
-
-np.set_printoptions(formatter={'int': color_sign})
+np.set_printoptions(formatter={'int': lib.color_sign})
 
 RANDOM_SEED = 42
 INCOME_THRESHOLD = 0 # FIXME this should be diff than 0
@@ -113,7 +93,8 @@ def load_data():
             d.get(country, {}).get('population', {}).get('mean', {}),
             d.get(country, {}).get('growth_rate', {}).get('mean', {}),
             d.get(country, {}).get('income', {}).get('mean', {}),
-            0, # literacy_rate
+            #d.get(country, {}).get('literacy_rate', {}).get('mean', {}),
+            1,
             d.get(country, {}).get('military_spdng', {}).get('mean', {}),
             i,
             random.uniform(0, 1), # gov rate
@@ -327,15 +308,15 @@ def start_war(env, coords, n_coords, country_s, country_a):
         countries[country_s].income_per_capita * \
             countries[country_s].population,
         countries[country_s].gov_rate,
-        1, #FIXME
+        countries[country_s].literacy_rate,
         countries[country_s].military_spending,
-        1,
+        random.uniform(0, 1), #luck
     )
     cwi_a = lib.cwi(
         countries[country_a].income_per_capita * \
             countries[country_s].population,
         countries[country_a].gov_rate,
-        1, #FIXME
+        countries[country_a].literacy_rate,
         countries[country_a].military_spending,
         random.uniform(0, 1), #luck
     )

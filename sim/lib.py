@@ -1,6 +1,7 @@
 '''
 helper functions for the simulation
 '''
+import colorama
 
 def cwi(ti, gr, lr, ms, lk):
     '''
@@ -100,3 +101,21 @@ def print_current_state(countries):
         print('--------------------------')
         print(c)
         print('--------------------------')
+
+def color_sign(x):
+    c = colorama.Fore.WHITE
+    if x == 1:
+        c = colorama.Fore.GREEN
+    if x == 2:
+        c = colorama.Fore.RED
+    if x == 3:
+        c = colorama.Fore.RESET
+    if x == 4:
+        c = colorama.Fore.YELLOW
+    if x == 5:
+        c = colorama.Fore.WHITE
+    if x == 6:
+        c = colorama.Fore.MAGENTA
+    if x == 7:
+        c = colorama.Fore.CYAN
+    return f'{c}{x}'
