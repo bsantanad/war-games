@@ -1,4 +1,5 @@
 import csv
+import enum
 import json
 import re
 import numpy as np
@@ -170,6 +171,7 @@ def get_regions():
                         for index, elem in enumerate(regions[continent].military_spdng.data):
                             regions[continent].military_spdng.data[index] += int(converted[index])
 
+    literacy_cnt = dict()
     with open(abs_path('src/literacy_rate_adult_total_percent_of_people_ages_15_and_above.csv'), mode='r', encoding="utf8") as lit:
         reader = csv.reader(lit)
         next(reader, None)
@@ -180,11 +182,24 @@ def get_regions():
                     new_row = row[1:]
                     converted = [conversion(x) for x in new_row]
 
+                    if not continent in literacy_cnt:
+                        literacy_cnt[continent] = [0 for x in range(len(converted))] # counter initialization
+
                     if not regions[continent].literacy_rate.data:
                         regions[continent].literacy_rate.data = converted
                     else:
                         for index, elem in enumerate(regions[continent].literacy_rate.data):
                             regions[continent].literacy_rate.data[index] += int(converted[index])
+                    
+                    for index, x in enumerate(converted):
+                        if x != 0: 
+                            literacy_cnt[continent][index] += 1 # counter
+    
+        for continent, cnt_list in literacy_cnt.items():
+            for index in range(len(regions[continent].literacy_rate.data)):
+                counter = cnt_list[index]
+                if counter > 0:
+                    regions[continent].literacy_rate.data[index] /= counter
 
     #Calculating means, stdv's and best fit distribution :)
     for continent, region in regions.items():
