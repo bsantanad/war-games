@@ -27,10 +27,9 @@ def population_after_war(population_density, total_population, df, is_winner):
     df: dead_toll
     '''
     if is_winner:
-        tmp = (1 - dead_toll) * dead_toll * population_density
-        return tmp - total_population
-
-    return (dead_toll * population_density) - total_population
+        tmp = (1 - df) * df * population_density
+        return total_population - tmp
+    return total_population - (df * population_density)
 
 def fill_grid(grid, countries):
     '''
