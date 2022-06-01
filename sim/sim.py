@@ -30,7 +30,7 @@ class country_c():
     country class,
     '''
     def __init__(self, territory, n_cells, population, population_growth,
-                 income_per_capita, literacy_rate, military_spending):
+                 income_per_capita, literacy_rate, military_spending, number):
         self.territory = territory # actual territory
         self.n_cells= n_cells # number of spaces in the grid
         self.population = population
@@ -38,11 +38,11 @@ class country_c():
         self.income_per_capita = income_per_capita
         self.literacy_rate = literacy_rate
         self.military_spending = military_spending
+        self.number = number
         self.gov_rate = 1 #FIXME random number between 1 and 0
 
         self.is_at_war = False # bool that tells us if the country is at war
                                # if it is it can not start another one
-        self.number = None
 
     def __str__(self):
         return json.dumps({
@@ -76,16 +76,17 @@ def load_data():
     for country in countries.keys():
         countries[country] = country_c(
             d.get(country, {}).get('territory', {}).get('mean', {}),
-            i, # n_cells
+            0, # n_cells
             d.get(country, {}).get('population', {}).get('mean', {}),
             d.get(country, {}).get('growth_rate', {}).get('mean', {}),
             d.get(country, {}).get('income', {}).get('mean', {}),
             0, # literacy_rate
             d.get(country, {}).get('military_spdng', {}).get('mean', {}),
+            i,
         )
         i += 1
 
-def setup(countries):
+def build_map(countries):
 
     # get percentage of territorry we will assing to each country
     # and save it in p
@@ -93,7 +94,7 @@ def setup(countries):
     for d in countries.values():
         total += d.territory
 
-    p = {
+    cells = {
         'africa': round(countries['africa'].territory * 100 / total),
         'europe': round(countries['europe'].territory * 100 / total),
         'middle_east': round(countries['middle_east'].territory * 100 / total),
@@ -104,8 +105,11 @@ def setup(countries):
         's_america': round(countries['s_america'].territory * 100 / total),
     }
 
+    for country, n in cells.items():
+        countries[country].n_cells = n
+
     global grid
-    grid = lib.fill_grid(grid, p)
+    grid = lib.fill_grid(grid, cells)
 
 
 def war(env):
@@ -121,7 +125,9 @@ def check_for_war(env, coords):
 
 ## look here :)
 load_data()
-setup(countries)
+build_map(countries)
+
+print(countries['africa'])
 
 env = simpy.Environment()
 env.process(war(env))
