@@ -10,6 +10,16 @@ import lib
 
 import colorama
 
+'''
+FIXME
+does not consider internal conflicts
+does not conisder peace times
+does not consider government at all
+does not consider growth population
+does not consider literacy
+does not consider peace times
+'''
+
 def color_sign(x):
     c = colorama.Fore.WHITE
     if x == 1:
@@ -136,10 +146,14 @@ def build_map(countries):
     grid = lib.fill_grid(grid, cells)
 
 
-def war(env):
+def war():
+    env = None
+    day = 0
     while True:
+        if day == 10:
+            break
         time.sleep(1)
-        print(f'day: {env.now}')
+        print(f'day: {day}')
         print(grid)
 
         # we will use the income and population density of the whole world in
@@ -157,14 +171,13 @@ def war(env):
 
         for j, row in enumerate(grid):
             for i, col in enumerate(row):
-                yield env.process(
-                    check_for_war(
-                        env, (j, i),
-                        income_std,
-                        populations_std,
-                        populations_mean
-                    )
+                check_for_war(
+                    env, (j, i),
+                    income_std,
+                    populations_std,
+                    populations_mean
                 )
+        day += 1
 
 def check_for_war(env, coords, income_std, populations_std, populations_mean):
     '''
@@ -284,9 +297,6 @@ def check_for_war(env, coords, income_std, populations_std, populations_mean):
             #print('=======start war')
             start_war(env, coords, c_lowest, country_name, n_lowest)
 
-
-    yield env.timeout(1)
-
 def start_war(env, coords, n_coords, country_s, country_a):
     '''
     calculate the outcome of a war between two countries:
@@ -352,17 +362,4 @@ def start_war(env, coords, n_coords, country_s, country_a):
 ## flow starts here:)
 load_data()
 build_map(countries)
-
-'''
-for n, c in countries.items():
-    print(n)
-    print(c.population)
-'''
-env = simpy.Environment()
-env.process(war(env))
-env.run(until = 20)
-'''
-for n, c in countries.items():
-    print(n)
-    print(c.population)
-'''
+war()
