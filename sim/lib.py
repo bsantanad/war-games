@@ -75,15 +75,22 @@ def fill_grid(grid, countries):
         n += 1
     return grid
 
-def get_neighbours(i, j):
+def get_neighbours(i, j, map_len):
     '''
     :returns: coord for
         left, right, up, down
     '''
-    # TODO maybe we need to validate here we are not out of the grid, dont
-    #  dont know if do this here or elsewhere
     left = (i, j - 1)
     right = (i, j + 1)
-    top = (i + 1, j)
-    down = (i - 1, j)
+    top = (i - 1, j)
+    down = (i + 1, j)
+    if j - 1 < 0:
+        left = None
+    if j + 1 > map_len - 1:
+        right = None
+    if i - 1 < 0:
+        top = None
+    if i + 1 > map_len - 1:
+        down = None
+
     return left, right, top, down

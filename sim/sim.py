@@ -41,8 +41,7 @@ class country_c():
         self.number = number
         self.gov_rate = 1 #FIXME random number between 1 and 0
 
-        self.is_at_war = False # bool that tells us if the country is at war
-                               # if it is it can not start another one
+        self.is_at_war = [] # list of coords that are at war
 
     def __str__(self):
         return json.dumps({
@@ -117,11 +116,32 @@ def war(env):
     while True:
         print(f'day: {env.now}')
         print(grid)
+
+        # we will use the income and population density of the whole world in
+        # order to build distributions, and get the mean and standard deviation
+        incomes = []
+        for country in countries.values():
+            incomes.append(country.income_per_capita)
+        income_std = np.std(incomes)
+
+        populations = []
+        for country in countries.values():
+            populations.append(country.population)
+        populations_mean = np.mean(populations)
+        populations_std = np.std(populations)
+
         for j, row in enumerate(grid):
             for i, col in enumerate(row):
-                yield env.process(check_for_war(env, (i, j)))
+                yield env.process(
+                    check_for_war(
+                        env, (j, i),
+                        income_std,
+                        populations_std,
+                        populations_mean
+                    )
+                )
 
-def check_for_war(env, coords):
+def check_for_war(env, coords, income_std, populations_std, populations_mean):
     '''
     this checks if we need to start a war, first it will find the neighbours
     and then get the countries info. based on that it will calculate if
@@ -130,13 +150,109 @@ def check_for_war(env, coords):
     the grid is also a global variable, so there you can use it inside the
     function without much trouble
     '''
+    # get country we are currently at
+    country_num = grid[coords[0]][coords[1]]
+    for name, country in countries.items():
+        if country.number == country_num:
+            country_name = name
+            break
+
+    # FIXME check if this works
+    for c in countries[country_name].is_at_war:
+        if c == coords:
+            print(f'{coords} already at war')
+            return
+
+    # get neighbours in grid and then get the actual country that number
+    # represents
+    neigh_coords = lib.get_neighbours(coords[0], coords[1], MAP_SIZE)
+    neigh_nums = [None, None, None, None]
+    for i, neigh in enumerate(neigh_coords):
+        if not neigh:
+            continue
+        neigh_nums[i] = grid[neigh[0]][neigh[1]]
+
+    neighbours = [None, None, None, None]
+    for i, n in enumerate(neigh_nums):
+        for name, country in countries.items():
+            if country.number == n:
+                neighbours[i] = name
+                break
+
+    # check if the neighbours are the same country as us
+    for i, neigh in enumerate(neighbours):
+        if neigh == country_name:
+            neighbours[i] = None
+
+    # we are deep in our contury no relevant neighbours
+    if neighbours.count(None) == len(neighbours):
+        return
+    #print(f'found neighbour of {country_name} at {env.now}')
+    #print(neighbours)
+
+    # check for war income trigger
+    for i, neighbour in enumerate(neighbours):
+        if not neighbour:
+            continue
+        for c in countries[neighbour].is_at_war:
+            #print(c)
+            #print(neigh_coords[i])
+            if c == neigh_coords[i]:
+                print('already at war')
+                return
+        #print(f'checking for conflict between {country_name} and {neighbour}')
+        # neighbour total income
+        n_total_income = countries[neighbour].income_per_capita * \
+                         countries[neighbour].population
+        # country total income
+        c_total_income = countries[country_name].income_per_capita * \
+                         countries[country_name].population
+
+        # if neighbour country total income is within one std deviation of
+        # owns, then launch the war
+        if c_total_income - n_total_income < income_std:
+            countries[neighbour].is_at_war.append(neigh_coords[i])
+            countries[neighbour].is_at_war.append(coords)
+            print(f'conflict between {country_name} and {neighbour}')
+            print('=======start war')
+            start_war(env, coords, neigh_coords[i], country_name, neighbour)
+            return
+
+    # check for population trigger
+    # if population density reaches one std dev above the median of the region,
+    # a conflict will be triggered in order to look for further territory.
+    if countries[country_name].population + populations_std > populations_mean:
+        lowest = -1
+        n_lowest = None
+        c_lowest = None
+        for i, neighbour in enumerate(neighbours):
+            if not neighbour:
+                continue
+            for c in countries[neighbour].is_at_war:
+                if c == neigh_coords[i]:
+                    print('already at war')
+                    return
+            if countries[neighbour].income_per_capita < lowest:
+                n_lowest = neighbour
+                c_lowest = neigh_coords[i]
+                lowest = countries[neighbour].income_per_capita
+                continue
+
+        if n_lowest:
+            print(f'conflict between {country_name} and {n_lowest}')
+            print('=======start war')
+            start_war(env, coords, c_lowest, country_name, n_lowest)
+
+
     yield env.timeout(1)
 
-def start_war(env, coords, country_s, country_a):
+def start_war(env, coords, n_coords, country_s, country_a):
     '''
     calculate the outcome of a war between two countries:
     country_s is the one that started the war
     country_a is the one that is against
+
+    n_coords neighbour coords
 
     here we also need to substract causalties and all that
     it is done by accessing the global dict: `countries`
@@ -151,5 +267,5 @@ build_map(countries)
 
 env = simpy.Environment()
 env.process(war(env))
-env.run(until = 1)
+env.run(until = 40)
 
