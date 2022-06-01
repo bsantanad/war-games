@@ -15,7 +15,6 @@ FIXME
 does not consider internal conflicts
 does not conisder peace times
 does not consider government at all
-does not consider growth population
 does not consider literacy
 does not consider peace times
 '''
@@ -64,7 +63,8 @@ class country_c():
     country class,
     '''
     def __init__(self, territory, n_cells, population, population_growth,
-                 income_per_capita, literacy_rate, military_spending, number):
+                 income_per_capita, literacy_rate, military_spending, number,
+                 gov_rate):
         self.territory = territory # actual territory
         self.n_cells= n_cells # number of spaces in the grid
         self.population = population
@@ -73,7 +73,7 @@ class country_c():
         self.literacy_rate = literacy_rate
         self.military_spending = military_spending
         self.number = number
-        self.gov_rate = 1 #FIXME random number between 1 and 0
+        self.gov_rate = gov_rate #FIXME random number between 1 and 0
 
         self.is_at_war = [] # list of coords that are at war
 
@@ -87,7 +87,7 @@ class country_c():
             'literacy_rate': self.literacy_rate,
             'military_spending': self.military_spending,
             'gov_rate': self.gov_rate,
-            'is_at_war': self.is_at_war,
+            #'is_at_war': self.is_at_war,
             'number': self.number,
         }, indent = 4)
 
@@ -116,6 +116,7 @@ def load_data():
             0, # literacy_rate
             d.get(country, {}).get('military_spdng', {}).get('mean', {}),
             i,
+            random.uniform(0, 1), # gov rate
         )
         i += 1
 
@@ -169,6 +170,8 @@ def war():
         populations_mean = np.mean(populations)
         populations_std = np.std(populations)
 
+        update_population()
+
         for j, row in enumerate(grid):
             for i, col in enumerate(row):
                 check_for_war(
@@ -178,6 +181,12 @@ def war():
                     populations_mean
                 )
         day += 1
+        lib.print_current_state(countries)
+
+def update_population():
+    for name, country in countries.items():
+        countries[name].population += \
+            countries[name].population_growth * 0.0833
 
 def check_for_war(env, coords, income_std, populations_std, populations_mean):
     '''

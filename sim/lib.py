@@ -93,3 +93,10 @@ def get_neighbours(i, j, map_len):
         down = None
 
     return left, right, top, down
+
+def print_current_state(countries):
+    for n, c in countries.items():
+        print(n)
+        print('--------------------------')
+        print(c)
+        print('--------------------------')
