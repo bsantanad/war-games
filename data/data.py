@@ -35,6 +35,7 @@ class Region:
         }, indent = 4)
 
 class Variable:
+    years = None # static list to be filled
     def __init__(self, name):
         self.name = name
         self.data = []
@@ -86,14 +87,15 @@ def get_regions():
             else:
                 regions_data[region].add(country)
 
-
     with open(abs_path('src/population_total.csv'), mode='r', encoding="utf8") as pop:
         reader = csv.reader(pop)
-        next(reader, None)
+        years = [conversion(x) for x in next(reader)[1:]] # save years
+        regions[next(iter(regions))].population.years = years # use arbitrary continent to save years
         for row in reader:
             #print(row)
             country = row[0]
             for continent, countries in regions_data.items():
+                
                 if country in countries:
                     new_row = row[1:]
                     converted = [conversion(x) for x in new_row]
@@ -227,6 +229,12 @@ def get_regions():
         f.fit()
         region.income.distribution = f.get_best(method = 'sumsquare_error')
 
+        region.income.mean = np.mean(region.income.data)
+        region.income.stdv = np.std(region.income.data)
+        f = Fitter(np.array(region.income.data), distributions=distributions_list)
+        f.fit()
+        region.income.distribution = f.get_best(method = 'sumsquare_error')
+
         region.military_spdng.mean = np.mean(region.military_spdng.data)
         region.military_spdng.stdv = np.std(region.military_spdng.data)
         f = Fitter(np.array(region.military_spdng.data), distributions=distributions_list)
@@ -237,5 +245,8 @@ def get_regions():
 
 
 regions = get_regions()
+'''
 for name, reg in regions.items():
     print(reg)
+'''
+print(regions['africa'].population.years[:3])
