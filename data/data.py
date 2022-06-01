@@ -21,6 +21,18 @@ class Region:
         self.income = Variable('income')
         self.literacy_rate = Variable('literacy_rate')
         self.military_spdng = Variable('military_spdng')
+
+    def __str__(self):
+        return json.dumps({
+            'name': self.name,
+            'territory': self.territory.to_json(),
+            'population': self.population.to_json(),
+            'growth_rate': self.growth_rate.to_json(),
+            'income': self.income.to_json(),
+            'literacy_rate': self.literacy_rate.to_json(),
+            'military_spdng': self.military_spdng.to_json(),
+        }, indent = 4)
+
 class Variable:
     def __init__(self, name):
         self.name = name
@@ -28,6 +40,15 @@ class Variable:
         self.distribution = ''
         self.mean = 0
         self.stdv = 0
+
+    def to_json(self):
+        return json.dumps({
+            'name': self.name,
+            'data': self.data,
+            'distribution': self.distribution,
+            'mean': self.mean,
+            'stdv': self.stdv,
+        })
 
 def conversion(x):
     if x == '':
@@ -63,7 +84,7 @@ def get_regions():
                 regions_data[region] = set()
             else:
                 regions_data[region].add(country)
-        
+
 
     with open(abs_path('src/population_total.csv'), mode='r', encoding="utf8") as pop:
         reader = csv.reader(pop)
@@ -75,7 +96,7 @@ def get_regions():
                 if country in countries:
                     new_row = row[1:]
                     converted = [conversion(x) for x in new_row]
-                    
+
                     if not regions[continent].population.data:
                         regions[continent].population.data = converted
                         #print(converted)
@@ -93,7 +114,7 @@ def get_regions():
                 if country in countries:
                     new_row = row[1:]
                     converted = [conversion(x) for x in new_row]
-                    
+
                     if not regions[continent].territory.data:
                         regions[continent].territory.data = converted
                     else:
@@ -110,7 +131,7 @@ def get_regions():
                 if country in countries:
                     new_row = row[1:]
                     converted = [conversion(x) for x in new_row]
-                    
+
                     if not regions[continent].growth_rate.data:
                         regions[continent].growth_rate.data = converted
                     else:
@@ -126,7 +147,7 @@ def get_regions():
                 if country in countries:
                     new_row = row[1:]
                     converted = [conversion(x) for x in new_row]
-                    
+
                     if not regions[continent].income.data:
                         regions[continent].income.data = converted
                     else:
@@ -142,7 +163,7 @@ def get_regions():
                 if country in countries:
                     new_row = row[1:]
                     converted = [conversion(x) for x in new_row]
-                    
+
                     if not regions[continent].military_spdng.data:
                         regions[continent].military_spdng.data = converted
                     else:
@@ -181,18 +202,10 @@ def get_regions():
         f = Fitter(np.array(region.military_spdng.data), distributions=distributions_list)
         f.fit()
         region.military_spdng.distribution = f.get_best(method = 'sumsquare_error')
-    
+
     return regions
 
 
-'''
-print(regions['africa'].population.data[219])
-print(regions['africa'].territory.data[57])
-print(regions['africa'].growth_rate.data[57])
-print(regions['africa'].income.data[219])
-print(regions['africa'].military_spdng.data[57])
-'''
-
 regions = get_regions()
-print(regions['europe'].territory.distribution)
-print(regions['asia'].population.distribution)
+for name, reg in regions.items():
+    print(reg)
