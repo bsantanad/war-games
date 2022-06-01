@@ -12,7 +12,7 @@ def cwi(ti, gr, lr, ms, lk):
         MS = military spending
         LK = luck
     '''
-    return ti * gr * ls * ms * lk
+    return ti * gr * lr * ms * lk
 
 def dead_toll(cwi_winning_side, cwi_loosing_side):
     '''

@@ -1,3 +1,5 @@
+import random
+import time
 import json
 import os
 
@@ -157,11 +159,13 @@ def check_for_war(env, coords, income_std, populations_std, populations_mean):
             country_name = name
             break
 
+    '''
     # FIXME check if this works
     for c in countries[country_name].is_at_war:
         if c == coords:
-            print(f'{coords} already at war')
+            #print(f'{coords} already at war')
             return
+    '''
 
     # get neighbours in grid and then get the actual country that number
     # represents
@@ -194,12 +198,14 @@ def check_for_war(env, coords, income_std, populations_std, populations_mean):
     for i, neighbour in enumerate(neighbours):
         if not neighbour:
             continue
+        '''
         for c in countries[neighbour].is_at_war:
             #print(c)
             #print(neigh_coords[i])
             if c == neigh_coords[i]:
-                print('already at war')
+                #print('already at war')
                 return
+        '''
         #print(f'checking for conflict between {country_name} and {neighbour}')
         # neighbour total income
         n_total_income = countries[neighbour].income_per_capita * \
@@ -213,9 +219,21 @@ def check_for_war(env, coords, income_std, populations_std, populations_mean):
         if c_total_income - n_total_income < income_std:
             countries[neighbour].is_at_war.append(neigh_coords[i])
             countries[neighbour].is_at_war.append(coords)
-            print(f'conflict between {country_name} and {neighbour}')
-            print('=======start war')
-            start_war(env, coords, neigh_coords[i], country_name, neighbour)
+            #print('=======start war')
+            #print(f'conflict between {country_name} and {neighbour}')
+            winner = start_war(
+                env,
+                coords,
+                neigh_coords[i],
+                country_name,
+                neighbour,
+            )
+            if winner == country_name:
+                grid[neigh_coords[i][0]][neigh_coords[i][1]] = \
+                     countries[country_name].number
+            elif winner == neighbour:
+                grid[coords[0]][coords[1]] = \
+                     countries[neighbour].number
             return
 
     # check for population trigger
@@ -230,7 +248,7 @@ def check_for_war(env, coords, income_std, populations_std, populations_mean):
                 continue
             for c in countries[neighbour].is_at_war:
                 if c == neigh_coords[i]:
-                    print('already at war')
+                    #print('already at war')
                     return
             if countries[neighbour].income_per_capita < lowest:
                 n_lowest = neighbour
@@ -239,8 +257,8 @@ def check_for_war(env, coords, income_std, populations_std, populations_mean):
                 continue
 
         if n_lowest:
-            print(f'conflict between {country_name} and {n_lowest}')
-            print('=======start war')
+            #print(f'conflict between {country_name} and {n_lowest}')
+            #print('=======start war')
             start_war(env, coords, c_lowest, country_name, n_lowest)
 
 
@@ -259,7 +277,28 @@ def start_war(env, coords, n_coords, country_s, country_a):
     if say, you want to access africa you would do
     countries['africa'].population -= casualties
     '''
-    pass
+    cwi_s = lib.cwi(
+        countries[country_s].income_per_capita * \
+            countries[country_s].population,
+        countries[country_s].gov_rate,
+        1, #FIXME
+        countries[country_s].military_spending,
+        1,
+    )
+    cwi_a = lib.cwi(
+        countries[country_a].income_per_capita * \
+            countries[country_s].population,
+        countries[country_a].gov_rate,
+        1, #FIXME
+        countries[country_a].military_spending,
+        random.uniform(0, 1), #luck
+    )
+    if cwi_s < cwi_a:
+        #print(f'{country_s} won')
+        return country_s
+    else:
+        #print(f'{country_a} won')
+        return country_a
 
 ## flow starts here:)
 load_data()
@@ -267,5 +306,5 @@ build_map(countries)
 
 env = simpy.Environment()
 env.process(war(env))
-env.run(until = 40)
+env.run(until = 100)
 
