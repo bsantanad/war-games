@@ -227,6 +227,13 @@ def get_regions():
         f.fit()
         region.income.distribution = f.get_best(method = 'sumsquare_error')
 
+        filtered = [x for x in region.literacy_rate.data if x != 0]
+        region.literacy_rate.mean = np.mean(filtered)
+        region.literacy_rate.stdv = np.std(filtered)
+        f = Fitter(np.array(region.literacy_rate.data), distributions=distributions_list)
+        f.fit()
+        region.income.distribution = f.get_best(method = 'sumsquare_error')
+
         region.military_spdng.mean = np.mean(region.military_spdng.data)
         region.military_spdng.stdv = np.std(region.military_spdng.data)
         f = Fitter(np.array(region.military_spdng.data), distributions=distributions_list)
