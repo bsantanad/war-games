@@ -1,4 +1,5 @@
 import json
+import os
 
 import numpy as np
 import simpy
@@ -11,6 +12,18 @@ POP_THRESHOLD = 0 # FIXME this should be diff than 0
 MAP_SIZE = 10 # grid size nxn
 
 grid = np.zeros([MAP_SIZE, MAP_SIZE], dtype = int)
+
+DATA_PATH = os.getenv('DATA_PATH', '../data/data.json')
+
+countries = {
+    'africa': {},
+    'europe': {},
+    'middle_east': {},
+    'asia': {},
+    'oceania_se_asia': {},
+    'n_america': {},
+    's_america': {},
+}
 
 class country_c():
     '''
@@ -31,58 +44,69 @@ class country_c():
                                # if it is it can not start another one
         self.number = None
 
+    def __str__(self):
+        return json.dumps({
+            'territory': self.territory,
+            'n_cells': self.n_cells,
+            'population': self.population,
+            'population_growth': self.population_growth,
+            'income_per_capita': self.income_per_capita,
+            'literacy_rate': self.literacy_rate,
+            'military_spending': self.military_spending,
+            'gov_rate': self.gov_rate,
+            'is_at_war': self.is_at_war,
+            'number': self.number,
+        }, indent = 4)
+
     def total_income(self):
         return self.population * self.income_per_capita
 
+def load_data():
+    '''
+    load data from json and add it to a dict where the key is the
+    country name, and the value is a country_c object
+    '''
+    # read data from the ../data/data.json
+    script_dir = os.path.dirname(__file__)
+    path = script_dir + '/' +  DATA_PATH
+    with open(path, 'r') as f:
+        d = json.loads(f.read())
 
+    i = 1
+    for country in countries.keys():
+        countries[country] = country_c(
+            d.get(country, {}).get('territory', {}).get('mean', {}),
+            i, # n_cells
+            d.get(country, {}).get('population', {}).get('mean', {}),
+            d.get(country, {}).get('growth_rate', {}).get('mean', {}),
+            d.get(country, {}).get('income', {}).get('mean', {}),
+            0, # literacy_rate
+            d.get(country, {}).get('military_spdng', {}).get('mean', {}),
+        )
+        i += 1
 
-def setup():
-
-    # FIXME get this data from the data team
-    t = {
-        'africa': 22874822.413793102,
-        'europe': 24013826.137931034,
-        'asia': 12038027.879310345,
-        'seme_asia': 16254452.465517242,
-        'n_america': 22248771.896551725,
-        's_america': 14953913.793103449,
-        'oceania': 795158.9655172414,
-    }
-
-    # TODO read all data of the data team, and load it to countries structure
-    # also each country will be represented in the grid as a number, so be
-    # sure to set the `number` attr
-
-    # e.g. of how to create a country
-    africa = country_c(
-        0, # territory
-        0, # n_cells
-        0, # population
-        0, # population_growth
-        0, # income_per_capita
-        0, # literacy_rate
-        0, # military_spending
-    )
+def setup(countries):
 
     # get percentage of territorry we will assing to each country
     # and save it in p
     total = 0
-    for territoy in t.values():
-        total += territoy
+    for d in countries.values():
+        total += d.territory
+
     p = {
-        'africa': round(t['africa'] * 100 / total),
-        'europe': round(t['europe'] * 100 / total),
-        'asia': round(t['asia'] * 100 / total),
-        'seme_asia': round(t['seme_asia'] * 100 / total),
-        'n_america': round(t['n_america'] * 100 / total),
-        's_america': round(t['s_america'] * 100 / total),
-        'oceania': round(t['oceania'] * 100 / total),
+        'africa': round(countries['africa'].territory * 100 / total),
+        'europe': round(countries['europe'].territory * 100 / total),
+        'middle_east': round(countries['middle_east'].territory * 100 / total),
+        'asia': round(countries['asia'].territory * 100 / total),
+        'oceania_se_asia': \
+            round(countries['oceania_se_asia'].territory * 100 / total),
+        'n_america': round(countries['n_america'].territory * 100 / total) - 1,
+        's_america': round(countries['s_america'].territory * 100 / total),
     }
 
     global grid
     grid = lib.fill_grid(grid, p)
 
-setup()
 
 def war(env):
     while True:
@@ -95,6 +119,11 @@ def war(env):
 def check_for_war(env, coords):
     yield env.timeout(1)
 
+## look here :)
+load_data()
+setup(countries)
+
 env = simpy.Environment()
 env.process(war(env))
 env.run(until = 1)
+
