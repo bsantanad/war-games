@@ -87,9 +87,10 @@ def load_data():
         i += 1
 
 def build_map(countries):
-
-    # get percentage of territorry we will assing to each country
-    # and save it in p
+    '''
+    based on the percentage of initial territory build the map, this
+    is a grid 10 by 10 with numbers that represent the countries
+    '''
     total = 0
     for d in countries.values():
         total += d.territory
@@ -125,6 +126,9 @@ def check_for_war(env, coords):
     this checks if we need to start a war, first it will find the neighbours
     and then get the countries info. based on that it will calculate if
     the war need to be started if so, call start_war if not do nothing
+
+    the grid is also a global variable, so there you can use it inside the
+    function without much trouble
     '''
     yield env.timeout(1)
 
