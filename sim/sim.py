@@ -121,13 +121,29 @@ def war(env):
                 yield env.process(check_for_war(env, (i, j)))
 
 def check_for_war(env, coords):
+    '''
+    this checks if we need to start a war, first it will find the neighbours
+    and then get the countries info. based on that it will calculate if
+    the war need to be started if so, call start_war if not do nothing
+    '''
     yield env.timeout(1)
 
-## look here :)
+def start_war(env, coords, country_s, country_a):
+    '''
+    calculate the outcome of a war between two countries:
+    country_s is the one that started the war
+    country_a is the one that is against
+
+    here we also need to substract causalties and all that
+    it is done by accessing the global dict: `countries`
+    if say, you want to access africa you would do
+    countries['africa'].population -= casualties
+    '''
+    pass
+
+## flow starts here:)
 load_data()
 build_map(countries)
-
-print(countries['africa'])
 
 env = simpy.Environment()
 env.process(war(env))
