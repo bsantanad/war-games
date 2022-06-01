@@ -170,6 +170,21 @@ def get_regions():
                         for index, elem in enumerate(regions[continent].military_spdng.data):
                             regions[continent].military_spdng.data[index] += int(converted[index])
 
+    with open(abs_path('src/literacy_rate_adult_total_percent_of_people_ages_15_and_above.csv'), mode='r', encoding="utf8") as lit:
+        reader = csv.reader(lit)
+        next(reader, None)
+        for row in reader:
+            country = row[0]
+            for continent, countries in regions_data.items():
+                if country in countries:
+                    new_row = row[1:]
+                    converted = [conversion(x) for x in new_row]
+
+                    if not regions[continent].literacy_rate.data:
+                        regions[continent].literacy_rate.data = converted
+                    else:
+                        for index, elem in enumerate(regions[continent].literacy_rate.data):
+                            regions[continent].literacy_rate.data[index] += int(converted[index])
 
     #Calculating means, stdv's and best fit distribution :)
     for continent, region in regions.items():
