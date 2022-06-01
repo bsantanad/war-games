@@ -26,7 +26,7 @@ def color_sign(x):
     if x == 2:
         c = colorama.Fore.RED
     if x == 3:
-        c = colorama.Fore.BLUE
+        c = colorama.Fore.RESET
     if x == 4:
         c = colorama.Fore.YELLOW
     if x == 5:
@@ -131,12 +131,12 @@ def build_map(countries):
 
     cells = {
         'africa': round(countries['africa'].territory * 100 / total),
-        'europe': round(countries['europe'].territory * 100 / total),
+        'europe': round(countries['europe'].territory * 100 / total) - 1,
         'middle_east': round(countries['middle_east'].territory * 100 / total),
         'asia': round(countries['asia'].territory * 100 / total),
         'oceania_se_asia': \
             round(countries['oceania_se_asia'].territory * 100 / total),
-        'n_america': round(countries['n_america'].territory * 100 / total) - 1,
+        'n_america': round(countries['n_america'].territory * 100 / total),
         's_america': round(countries['s_america'].territory * 100 / total),
     }
 
@@ -181,12 +181,14 @@ def war():
                     populations_mean
                 )
         day += 1
-        lib.print_current_state(countries)
+        # uncomment this if you want to print the state of the countries each
+        # day
+        #lib.print_current_state(countries)
 
 def update_population():
     for name, country in countries.items():
         countries[name].population += \
-            countries[name].population_growth * 0.0833
+            countries[name].population_growth * 0.833
 
 def check_for_war(env, coords, income_std, populations_std, populations_mean):
     '''
@@ -197,6 +199,8 @@ def check_for_war(env, coords, income_std, populations_std, populations_mean):
     the grid is also a global variable, so there you can use it inside the
     function without much trouble
     '''
+    if random.randint(0, 2) == 1:
+        return
     # get country we are currently at
     country_num = grid[coords[0]][coords[1]]
     for name, country in countries.items():
