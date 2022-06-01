@@ -8,6 +8,28 @@ import simpy
 
 import lib
 
+import colorama
+
+def color_sign(x):
+    c = colorama.Fore.WHITE
+    if x == 1:
+        c = colorama.Fore.GREEN
+    if x == 2:
+        c = colorama.Fore.RED
+    if x == 3:
+        c = colorama.Fore.BLUE
+    if x == 4:
+        c = colorama.Fore.YELLOW
+    if x == 5:
+        c = colorama.Fore.WHITE
+    if x == 6:
+        c = colorama.Fore.MAGENTA
+    if x == 7:
+        c = colorama.Fore.CYAN
+    return f'{c}{x}'
+
+np.set_printoptions(formatter={'int': color_sign})
+
 RANDOM_SEED = 42
 INCOME_THRESHOLD = 0 # FIXME this should be diff than 0
 POP_THRESHOLD = 0 # FIXME this should be diff than 0
@@ -116,6 +138,7 @@ def build_map(countries):
 
 def war(env):
     while True:
+        time.sleep(1)
         print(f'day: {env.now}')
         print(grid)
 
@@ -293,18 +316,53 @@ def start_war(env, coords, n_coords, country_s, country_a):
         countries[country_a].military_spending,
         random.uniform(0, 1), #luck
     )
-    if cwi_s < cwi_a:
+    if cwi_s > cwi_a:
         #print(f'{country_s} won')
+        df = lib.dead_toll(cwi_s, cwi_a)
+        countries[country_s].population = lib.population_after_war(
+            countries[country_s].population / countries[country_s].territory,
+            countries[country_s].population,
+            df,
+            1,
+        )
+        countries[country_a].population = lib.population_after_war(
+            countries[country_a].population / countries[country_a].territory,
+            countries[country_a].population,
+            df,
+            0,
+        )
         return country_s
     else:
         #print(f'{country_a} won')
+        df = lib.dead_toll(cwi_a, cwi_s)
+        countries[country_s].population = lib.population_after_war(
+            countries[country_s].population / countries[country_s].territory,
+            countries[country_s].population,
+            df,
+            0,
+        )
+        countries[country_a].population = lib.population_after_war(
+            countries[country_a].population / countries[country_a].territory,
+            countries[country_a].population,
+            df,
+            1,
+        )
         return country_a
 
 ## flow starts here:)
 load_data()
 build_map(countries)
 
+'''
+for n, c in countries.items():
+    print(n)
+    print(c.population)
+'''
 env = simpy.Environment()
 env.process(war(env))
-env.run(until = 100)
-
+env.run(until = 20)
+'''
+for n, c in countries.items():
+    print(n)
+    print(c.population)
+'''
