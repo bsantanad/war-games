@@ -93,8 +93,7 @@ def load_data():
             d.get(country, {}).get('population', {}).get('mean', {}),
             d.get(country, {}).get('growth_rate', {}).get('mean', {}),
             d.get(country, {}).get('income', {}).get('mean', {}),
-            #d.get(country, {}).get('literacy_rate', {}).get('mean', {}),
-            1,
+            d.get(country, {}).get('literacy_rate', {}).get('mean', {}),
             d.get(country, {}).get('military_spdng', {}).get('mean', {}),
             i,
             random.uniform(0, 1), # gov rate
