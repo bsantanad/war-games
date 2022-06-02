@@ -20,9 +20,10 @@ does not consider peace times
 np.set_printoptions(formatter={'int': lib.color_sign})
 
 RANDOM_SEED = 42
-INCOME_THRESHOLD = 0 # FIXME this should be diff than 0
-POP_THRESHOLD = 0 # FIXME this should be diff than 0
+INCOME_THRESHOLD = 1
+POP_THRESHOLD = 1
 MAP_SIZE = 10 # grid size nxn
+DAYS = 10 # grid size nxn
 
 grid = np.zeros([MAP_SIZE, MAP_SIZE], dtype = int)
 
@@ -54,8 +55,8 @@ class country_c():
         self.military_spending = military_spending
         self.number = number
         self.gov_rate = gov_rate #FIXME random number between 1 and 0
-
         self.is_at_war = [] # list of coords that are at war
+        self.square_value = 1
 
     def __str__(self):
         return json.dumps({
@@ -69,10 +70,35 @@ class country_c():
             'gov_rate': self.gov_rate,
             #'is_at_war': self.is_at_war,
             'number': self.number,
+            'square_value': self.square_value,
+        }, indent = 4)
+
+    def to_json(self):
+        return json.dumps({
+            'territory': self.territory,
+            'n_cells': self.n_cells,
+            'population': self.population,
+            'population_growth': self.population_growth,
+            'income_per_capita': self.income_per_capita,
+            'literacy_rate': self.literacy_rate,
+            'military_spending': self.military_spending,
+            'gov_rate': self.gov_rate,
+            #'is_at_war': self.is_at_war,
+            'number': self.number,
+            'square_value': self.square_value,
         }, indent = 4)
 
     def total_income(self):
         return self.population * self.income_per_capita
+
+    def calc_square_value(self):
+        self.square_value = self.territory / self.n_cells
+        return
+
+    def modify_territory(self, n):
+        if self.territory + n < 1:
+            self.territory = 1
+        self.territory += n
 
 def load_data():
     '''
@@ -122,6 +148,7 @@ def build_map(countries):
 
     for country, n in cells.items():
         countries[country].n_cells = n
+        countries[country].calc_square_value()
 
     global grid
     grid = lib.fill_grid(grid, cells)
@@ -131,7 +158,7 @@ def war():
     env = None
     day = 0
     while True:
-        if day == 10:
+        if day == DAYS:
             break
         time.sleep(1)
         print(f'day: {day}')
@@ -152,6 +179,10 @@ def war():
 
         update_population()
 
+        # uncomment this if you want to print the state of the countries each
+        # day
+        #lib.print_current_state(countries, day)
+
         for j, row in enumerate(grid):
             for i, col in enumerate(row):
                 check_for_war(
@@ -161,9 +192,6 @@ def war():
                     populations_mean
                 )
         day += 1
-        # uncomment this if you want to print the state of the countries each
-        # day
-        #lib.print_current_state(countries)
 
 def update_population():
     for name, country in countries.items():
@@ -179,8 +207,9 @@ def check_for_war(env, coords, income_std, populations_std, populations_mean):
     the grid is also a global variable, so there you can use it inside the
     function without much trouble
     '''
-    if random.randint(0, 2) == 1:
+    if random.randint(0, 1) == 1:
         return
+
     # get country we are currently at
     country_num = grid[coords[0]][coords[1]]
     for name, country in countries.items():
@@ -245,7 +274,7 @@ def check_for_war(env, coords, income_std, populations_std, populations_mean):
 
         # if neighbour country total income is within one std deviation of
         # owns, then launch the war
-        if c_total_income - n_total_income < income_std:
+        if c_total_income - n_total_income > INCOME_THRESHOLD * income_std:
             countries[neighbour].is_at_war.append(neigh_coords[i])
             countries[neighbour].is_at_war.append(coords)
             #print('=======start war')
@@ -268,7 +297,7 @@ def check_for_war(env, coords, income_std, populations_std, populations_mean):
     # check for population trigger
     # if population density reaches one std dev above the median of the region,
     # a conflict will be triggered in order to look for further territory.
-    if countries[country_name].population + populations_std > populations_mean:
+    if countries[country_name].population + populations_std > POP_THRESHOLD * populations_mean:
         lowest = -1
         n_lowest = None
         c_lowest = None
@@ -321,6 +350,11 @@ def start_war(env, coords, n_coords, country_s, country_a):
     )
     if cwi_s > cwi_a:
         #print(f'{country_s} won')
+
+        # modify territory
+        countries[country_s].modify_territory(countries[country_a].square_value)
+        countries[country_s].n_cells += 1
+        # calc dead tolls
         df = lib.dead_toll(cwi_s, cwi_a)
         countries[country_s].population = lib.population_after_war(
             countries[country_s].population / countries[country_s].territory,
@@ -328,6 +362,10 @@ def start_war(env, coords, n_coords, country_s, country_a):
             df,
             1,
         )
+        # modify territory
+        countries[country_a].modify_territory(-1 * countries[country_a].square_value)
+        countries[country_a].n_cells -= 1
+        # calc dead tolls
         countries[country_a].population = lib.population_after_war(
             countries[country_a].population / countries[country_a].territory,
             countries[country_a].population,
@@ -337,6 +375,11 @@ def start_war(env, coords, n_coords, country_s, country_a):
         return country_s
     else:
         #print(f'{country_a} won')
+
+        # modify territory
+        countries[country_s].modify_territory(-1 * countries[country_s].square_value)
+        countries[country_s].n_cells -= 1
+        # calc dead tolls
         df = lib.dead_toll(cwi_a, cwi_s)
         countries[country_s].population = lib.population_after_war(
             countries[country_s].population / countries[country_s].territory,
@@ -344,6 +387,11 @@ def start_war(env, coords, n_coords, country_s, country_a):
             df,
             0,
         )
+
+        # modify territory
+        countries[country_a].modify_territory(countries[country_s].square_value)
+        # calc dead tolls
+        countries[country_a].n_cells += 1
         countries[country_a].population = lib.population_after_war(
             countries[country_a].population / countries[country_a].territory,
             countries[country_a].population,

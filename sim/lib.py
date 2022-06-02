@@ -2,6 +2,7 @@
 helper functions for the simulation
 '''
 import colorama
+import json
 
 def cwi(ti, gr, lr, ms, lk):
     '''
@@ -95,12 +96,18 @@ def get_neighbours(i, j, map_len):
 
     return left, right, top, down
 
-def print_current_state(countries):
+def print_current_state(countries, day):
     for n, c in countries.items():
+        print(json.dumps( {
+            'day': day,
+            n: c.to_json(),
+        }, indent = 4))
+        '''
         print(n)
         print('--------------------------')
         print(c)
         print('--------------------------')
+        '''
 
 def color_sign(x):
     c = colorama.Fore.WHITE
