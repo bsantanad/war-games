@@ -87,7 +87,8 @@ def get_regions():
             else:
                 regions_data[region].add(country)
     
-    def read_variable(filename, attr):
+    def read_variable(filename, attr, average=False):
+        if average: cnt = dict()
         with open(abs_path(f'src/{filename}.csv'), mode='r', encoding="utf8") as f:
             reader = csv.reader(f)
             years = [conversion(x) for x in next(reader)[1:]] # save years
@@ -106,44 +107,26 @@ def get_regions():
                         else:
                             for i in range(len(data)):
                                 getattr(regions[continent], attr).data[i] += int(converted[i])
+                        if average: 
+                            if not continent in cnt:
+                                cnt[continent] = [0 for x in range(len(converted))] # counter initialization
+                            for index, x in enumerate(converted):
+                                if x != 0: 
+                                    cnt[continent][index] += 1 # counter
+            if average:
+                for continent, cnt_list in cnt.items():
+                    data = getattr(regions[continent], attr).data
+                    for index in range(len(data)):
+                        counter = cnt_list[index]
+                        if counter > 0:
+                            getattr(regions[continent], attr).data[index] /= counter
 
     read_variable('population_total', 'population')
     read_variable('surface_area_sq_km', 'territory')
-    #not sure if it has to be a sum :)
-    read_variable('population_growth_annual_percent', 'growth_rate')
+    read_variable('population_growth_annual_percent', 'growth_rate') #not sure if it has to be a sum :)
     read_variable('income_per_person_gdppercapita_ppp_inflation_adjusted', 'income')
     read_variable('ms_mil_xpnd_gd_zs', 'military_spdng')
-
-    literacy_cnt = dict()
-    with open(abs_path('src/literacy_rate_adult_total_percent_of_people_ages_15_and_above.csv'), mode='r', encoding="utf8") as lit:
-        reader = csv.reader(lit)
-        years = [conversion(x) for x in next(reader)[1:]] 
-        regions[next(iter(regions))].literacy.years = years
-        for row in reader:
-            country = row[0]
-            for continent, countries in regions_data.items():
-                if country in countries:
-                    new_row = row[1:]
-                    converted = [conversion(x) for x in new_row]
-
-                    if not continent in literacy_cnt:
-                        literacy_cnt[continent] = [0 for x in range(len(converted))] # counter initialization
-
-                    if not regions[continent].literacy_rate.data:
-                        regions[continent].literacy_rate.data = converted
-                    else:
-                        for index, elem in enumerate(regions[continent].literacy_rate.data):
-                            regions[continent].literacy_rate.data[index] += int(converted[index])
-                    
-                    for index, x in enumerate(converted):
-                        if x != 0: 
-                            literacy_cnt[continent][index] += 1 # counter
-    
-        for continent, cnt_list in literacy_cnt.items():
-            for index in range(len(regions[continent].literacy_rate.data)):
-                counter = cnt_list[index]
-                if counter > 0:
-                    regions[continent].literacy_rate.data[index] /= counter
+    read_variable('literacy_rate_adult_total_percent_of_people_ages_15_and_above', 'literacy_rate', True)
 
     #Calculating means, stdv's and best fit distribution :)
     for continent, region in regions.items():
