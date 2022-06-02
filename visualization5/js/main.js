@@ -32,11 +32,11 @@ var g = svg.append("g")
 			//console.log(day)
 			continentes.forEach(cont => {
 				//console.log(cont)
-				info.set(day,aux.set(cont,data[day][cont].population))
+				info.set(day,aux.set(cont,data[day][cont].n_cells))
 			});
 
 		});
-		
+		console.log(info)
 		var populations = []
 		var objsContinents = []
 		
@@ -44,7 +44,7 @@ var g = svg.append("g")
 			populations.push(info.get(dias[0]).get(cont))
 			objsContinents.push(new ObjCont(cont,info.get(dias[0]).get(cont)))
 		});
-		
+		console.log(populations)
 		console.log(objsContinents)
 
 		var maxHeight = Math.max.apply(null,populations)
@@ -78,6 +78,7 @@ var g = svg.append("g")
 					return x(d.name);
 				})
 				.attr("y", (d) => {
+					console.log(d.population)
 					return y(d.population);
 				})
 				.attr("height", (d) => {
@@ -128,7 +129,7 @@ var g = svg.append("g")
 		.attr("font-size", "20px")
 		.attr("text-anchor", "middle")
 		.attr("transform", "rotate(-90)")
-		.text("Population");
+		.text("Spaces conquered");
 	
 	}).catch((error)=> {
 		console.log(error);

@@ -32,7 +32,7 @@ var g = svg.append("g")
 			//console.log(day)
 			continentes.forEach(cont => {
 				//console.log(cont)
-				info.set(day,aux.set(cont,data[day][cont].population))
+				info.set(day,aux.set(cont,data[day][cont].territory))
 			});
 
 		});
@@ -128,7 +128,7 @@ var g = svg.append("g")
 		.attr("font-size", "20px")
 		.attr("text-anchor", "middle")
 		.attr("transform", "rotate(-90)")
-		.text("Population");
+		.text("Territory");
 	
 	}).catch((error)=> {
 		console.log(error);
