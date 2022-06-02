@@ -14,19 +14,35 @@ var svg = d3.select("#chart-area")
 var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
-	d3.json("data/data.json").then((data)=> {
+	d3.json("../../data/data.json").then((data)=> {
 
 
 		console.log(data);
 		info = new Map()
+		populations = []
+
+		const arr = [3, 5, 8, 100, 20, 100];
+		const max = Math.max.apply(null, arr);
+		console.log(max)
+
 
 		Object.keys(data).forEach(continent => {
+			
+			populations.push(data[continent].population.data)
+			
 			info.set(continent,data[continent].population.data)
 			
 		});
+		console.log(info.keys());
+		
+		holi = Math.max.apply(null, populations);
+		console.log(holi)
 
+		
 
 	});
+
+	
 
 /*
 
