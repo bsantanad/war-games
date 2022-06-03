@@ -1,5 +1,32 @@
 # War Game
 
+simple war simulation, it is divided in regions of the words:
+- africa
+- europe
+- middle east
+- asia
+- oceania se asia
+- north america
+- south america
+this regions fight with each other in the simulation. The world is represented
+in a grid like the following:
+```
+[[1 1 1 1 1 1 1 1 1 1]
+ [1 1 1 1 1 1 1 1 1 1]
+ [1 1 2 2 2 2 2 2 2 2]
+ [2 2 2 2 2 2 2 2 2 2]
+ [2 2 3 3 3 4 4 4 4 4]
+ [4 4 4 5 5 5 5 5 5 5]
+ [5 5 5 5 5 5 5 5 6 6]
+ [6 6 6 6 6 6 6 6 6 6]
+ [6 6 6 6 6 6 6 7 7 7]
+ [7 7 7 7 7 7 7 7 7 7]]
+```
+each number represent a region.
+
+as the day pass in the sim, you can see how diff numbers grow while other
+diminish, this is happening because there are war breaking out.
+
 # set up
 you'll need python3 installed in your systems, then you can easily do
 ```
