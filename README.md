@@ -50,3 +50,4 @@ python sim.py
 ```
 by default, it will print the grid with the countries each day, it has a
 sleep of 1 second for you to check the map every iteration.
+
